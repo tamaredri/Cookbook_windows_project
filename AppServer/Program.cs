@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using WebAPI.Models;
+
 namespace AppServer
 {
     public class Program
@@ -7,6 +10,8 @@ namespace AppServer
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<RecipeContext>(options =>
+                   options.UseSqlServer(builder.Configuration.GetConnectionString("RecipeContext")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,3 +38,9 @@ namespace AppServer
         }
     }
 }
+
+/*
+ המודל ניגש לEF וומבקש ממנו את נתוניןם
+הDAL נוסף כדי להפריד בין שרת האפליקציה לבין הגישה לשירוטתים החיצוניים
+
+ ניצור מודלים9 נוספים שיטפלו בנתונים */
