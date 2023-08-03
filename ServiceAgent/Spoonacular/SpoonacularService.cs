@@ -104,6 +104,9 @@ namespace ServiceAgent.Spoonacular
 
         }
 
-        
+        public Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
