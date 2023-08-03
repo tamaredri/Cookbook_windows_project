@@ -12,16 +12,16 @@ namespace ServiceAgent.Spoonacular
 {
     public class SpoonacularService : ISpoonacularService
     {
-      
-        HttpClient client = new HttpClient();
 
-        string url = $"https://api.spoonacular.com/";
+        readonly HttpClient client = new();
+
+        readonly string url = $"https://api.spoonacular.com/";
 
         public const string SPOONACULAR_API_KEY = "4a7526f869174ac4828493187db94239";
         
-        string? parameters { get; set; }
+        string? Parameters { get; set; }
 
-        string? key = $"apiKey={SPOONACULAR_API_KEY}";
+        readonly string? key = $"apiKey={SPOONACULAR_API_KEY}";
 
         public SpoonacularService()
         {
@@ -33,14 +33,14 @@ namespace ServiceAgent.Spoonacular
         /// <returns>The complete query ready to be sent to the website</returns>
         private string? GetFullQuery()
         {
-            return $"{parameters}&{key}";
+            return $"{Parameters}&{key}";
         }
 
         public async Task<IEnumerable<Recipe>> GetRecipiesByFreeSearch(string query)
         {
-            List<Recipe> recipes = new List<Recipe>();
+            List<Recipe> recipes = new();
 
-            parameters = $"recipes/complexSearch?query={query}";
+            Parameters = $"recipes/complexSearch?query={query}";
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
 
@@ -62,15 +62,15 @@ namespace ServiceAgent.Spoonacular
         public async Task<IEnumerable<Recipe>> GetRecipiesByIngridients(IEnumerable<Ingridient> ingridients)
         {
 
-            if (ingridients.Count() == 0)
+            if (!ingridients.Any())
                 return new List<Recipe>();
 
             
             //findByIngredients?ingredients=apples,+flour,+sugar&number=2
-            parameters = $"recipes/findByIngredients?ingredients=";
+            Parameters = $"recipes/findByIngredients?ingredients=";
 
             foreach (Ingridient ingridient in ingridients){
-                    parameters += ",+" + ingridient.Name;
+                    Parameters += ",+" + ingridient.Name;
             }
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
@@ -86,7 +86,7 @@ namespace ServiceAgent.Spoonacular
 
         public async Task<FullRecipe> GetRecipeById(int ID)
         {
-            parameters = $"recipes/informationBulk?ids={ID}";
+            Parameters = $"recipes/informationBulk?ids={ID}";
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
@@ -115,7 +115,17 @@ namespace ServiceAgent.Spoonacular
 
         public async Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient)
         {
-            throw new NotImplementedException();
+            Parameters = $"food/ingredients/search?query={ingridient}&number=10";
+
+            HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("response StatusCode is error");
+            }
+
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var recipeResponce = JsonConvert.DeserializeObject<IEnumerable<Ingridient>>(jsonString);
+            return recipeResponce!;
         }
     }
 }
