@@ -23,7 +23,7 @@ namespace ServiceAgent.Spoonacular.REntities
 
         public override string? ToString()
         {
-            return $"ID: {ID},  name: {Name}, amount: {Amount}, unit: {Unit}, image: {Image}.";
+            return $"ID: {ID},  name: {Name},  amount: {Amount}, unit: {Unit}.";
         }
     }
 }

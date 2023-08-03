@@ -11,7 +11,7 @@ namespace ServiceAgent.Spoonacular.REntities
     public class RecipeCollection
     {
         [JsonProperty("results")]
-        public IEnumerable<Recipe>? Recipes { get; set; } = new List<Recipe>();
+        public IEnumerable<Recipe>? Recipes { get; set; }
 
         [JsonProperty("number")]
         public int? Number { get; set; }

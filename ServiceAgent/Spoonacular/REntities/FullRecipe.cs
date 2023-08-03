@@ -22,8 +22,8 @@ namespace ServiceAgent.Spoonacular.REntities
         [JsonProperty("extendedIngredients")]
         public List<IngridientInRecipe>? Ingridients { get; set; }
 
-        [JsonProperty("steps")]
-        public List<RecipeStep>? Steps { get; set; }
+        [JsonProperty("analyzedInstructions")]
+        public List<Instruction>? AnalyzedInstructions { get; set; }
 
         public override string? ToString()
         {
@@ -32,16 +32,11 @@ namespace ServiceAgent.Spoonacular.REntities
                 foreach (var i in Ingridients)
                     ingridientsDescription += $"{i}\n";       
             
-            string? recipeStepDescription = "";
-            if (Steps != null)
-                foreach (var s in Steps)
-                    recipeStepDescription += $"{s}\n";
-
             return $"Full recipe:\n{base.ToString()}\n" +
                    $"Suitable for {Servings} people.\n\n" +
                    $"Summary:\n{Summary}\n\n" +
                    $"Ingridients:\n{ingridientsDescription}\n\n" +
-                   $"Steps:\n{recipeStepDescription}";
+                   $"Steps:\n{AnalyzedInstructions!.FirstOrDefault()}";
         }
     }
 }
