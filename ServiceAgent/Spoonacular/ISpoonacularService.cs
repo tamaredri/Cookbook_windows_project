@@ -12,7 +12,7 @@ namespace ServiceAgent.Spoonacular
     {
         Task<IEnumerable<Recipe>> GetRecipiesByFreeSearch(string query);
         Task<IEnumerable<Recipe>> GetRecipiesByIngridients(IEnumerable<Ingridient> ingridients);
-        Task<FullRecipe> getRecipeById(int ID);
+        Task<FullRecipe> GetRecipeById(int ID);
         Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID);
 
         Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient);

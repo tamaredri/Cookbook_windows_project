@@ -84,7 +84,7 @@ namespace ServiceAgent.Spoonacular
             return JsonConvert.DeserializeObject<IEnumerable<Recipe>>(jsonString)!;
         }
 
-        public async Task<FullRecipe> getRecipeById(int ID)
+        public async Task<FullRecipe> GetRecipeById(int ID)
         {
             parameters = $"recipes/informationBulk?ids={ID}";
 
@@ -98,13 +98,22 @@ namespace ServiceAgent.Spoonacular
             return recipeResponce!.FirstOrDefault()!;
         }
 
-        public Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID)
+        public async Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID)
         {
-            throw new NotImplementedException();
+            parameters = $"recipes/{ID}/similar?";
 
+            HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("response StatusCode is error");
+
+            }
+            var jsonString = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<IEnumerable<Recipe>>(jsonString)!;
         }
 
-        public Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient)
+        public async Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient)
         {
             throw new NotImplementedException();
         }
