@@ -10,9 +10,6 @@ namespace ServiceAgent.Spoonacular.REntities
     public class FullRecipe : Recipe
     {
         //id,title,image
-        [JsonProperty("extendedIngredients")]
-        public List<IngridientInRecipe>? Ingridients { get; set; }
-
         [JsonProperty("readyInMinutes")]
         public int ReadyInMinutes { get; set; }
 
@@ -22,12 +19,29 @@ namespace ServiceAgent.Spoonacular.REntities
         [JsonProperty("summary")]
         public string? Summary { get; set; }
 
+        [JsonProperty("extendedIngredients")]
+        public List<IngridientInRecipe>? Ingridients { get; set; }
+
         [JsonProperty("steps")]
-        public List<RecipeStep>? steps { get; set; }
+        public List<RecipeStep>? Steps { get; set; }
 
         public override string? ToString()
         {
-            return base.ToString();
+            string? ingridientsDescription = "";
+            if (Ingridients != null)
+                foreach (var i in Ingridients)
+                    ingridientsDescription += $"{i}\n";       
+            
+            string? recipeStepDescription = "";
+            if (Steps != null)
+                foreach (var s in Steps)
+                    recipeStepDescription += $"{s}\n";
+
+            return $"Full recipe:\n{base.ToString()}\n" +
+                   $"Suitable for {Servings} people.\n\n" +
+                   $"Summary:\n{Summary}\n\n" +
+                   $"Ingridients:\n{ingridientsDescription}\n\n" +
+                   $"Steps:\n{Steps}";
         }
     }
 }
