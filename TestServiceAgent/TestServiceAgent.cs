@@ -20,15 +20,20 @@ namespace ServiceAgent
             //Applications application = new Applications(services);
             //var _spoonacular = application.Services.GetRequiredService<ISpoonacularService>();
             ISpoonacularService _spoonacular = new SpoonacularService();
-            testFreeSearch(_spoonacular);
+
+            //testFreeSearch(_spoonacular);
+
             Console.WriteLine("-------------------------------------------------------------------------");
-            testSearchByID(_spoonacular);
+            //testSearchByID(_spoonacular);
+
             Console.WriteLine("-------------------------------------------------------------------------");
-            testSearchByIngridient(_spoonacular);
+            //testSearchByIngridient(_spoonacular);
+
             Console.WriteLine("-------------------------------------------------------------------------");
-            testGetSimilarRecipe(_spoonacular);
+            //testGetSimilarRecipe(_spoonacular);
+
             Console.WriteLine("-------------------------------------------------------------------------");
-            testGetMatchingIngridients(_spoonacular);
+            //testGetMatchingIngridients(_spoonacular);
         }
 
         private static void testGetMatchingIngridients(ISpoonacularService _spoonacular)
@@ -73,7 +78,7 @@ namespace ServiceAgent
 
         private static void testSearchByID(ISpoonacularService _spoonacular)
         {
-            var specificRecipe = _spoonacular.GetRecipeById(655241).GetAwaiter().GetResult();
+            var specificRecipe = _spoonacular.GetRecipeById(655055).GetAwaiter().GetResult();
             Console.WriteLine(specificRecipe);
         }
 

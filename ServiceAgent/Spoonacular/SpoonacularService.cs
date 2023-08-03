@@ -12,16 +12,17 @@ namespace ServiceAgent.Spoonacular
 {
     public class SpoonacularService : ISpoonacularService
     {
-
+        #region fields
         readonly HttpClient client = new();
 
         readonly string url = $"https://api.spoonacular.com/";
 
-        public const string SPOONACULAR_API_KEY = "4a7526f869174ac4828493187db94239";
+        public const string SPOONACULAR_API_KEY = "eccecffd02a843c18dd94bd0e3497f09";
         
         string? Parameters { get; set; }
 
         readonly string? key = $"apiKey={SPOONACULAR_API_KEY}";
+        #endregion
 
         public SpoonacularService()
         {
@@ -29,56 +30,41 @@ namespace ServiceAgent.Spoonacular
             client.BaseAddress = new Uri(url);
         }
 
-
-        /// <returns>The complete query ready to be sent to the website</returns>
+        /// GetFullQuery Doc
+        /// <returns>The complete query ready to be sent to the website
+        /// </returns>
         private string? GetFullQuery()
         {
             return $"{Parameters}&{key}";
         }
 
+        #region interface implementation
         public async Task<IEnumerable<Recipe>> GetRecipiesByFreeSearch(string query)
         {
-            List<Recipe> recipes = new();
-
             Parameters = $"recipes/complexSearch?query={query}";
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
-            {
                 throw new Exception("response StatusCode is error");
-
-            }
+            
             var jsonString = await response.Content.ReadAsStringAsync();
-            var recipeList = JsonConvert.DeserializeObject<RecipeCollection>(jsonString);
-
-            if (recipeList != null)
-            {
-                recipes.AddRange(recipeList.Recipes!);
-            }
-            return recipes;
+            var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+            return jsonObject!.results.ToObject<IEnumerable<Recipe>>();
         }
 
         public async Task<IEnumerable<Recipe>> GetRecipiesByIngridients(IEnumerable<Ingridient> ingridients)
         {
-
             if (!ingridients.Any())
                 return new List<Recipe>();
-
             
-            //findByIngredients?ingredients=apples,+flour,+sugar&number=2
             Parameters = $"recipes/findByIngredients?ingredients=";
-
-            foreach (Ingridient ingridient in ingridients){
+            foreach (Ingridient ingridient in ingridients)
                     Parameters += ",+" + ingridient.Name;
-            }
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
-
             if (!response.IsSuccessStatusCode)
-            {
                 throw new Exception("response StatusCode is error");
-            }
 
             var jsonString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<Recipe>>(jsonString)!;
@@ -90,12 +76,14 @@ namespace ServiceAgent.Spoonacular
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
-            {
                 throw new Exception("response StatusCode is error");
-            }
             var jsonString = await response.Content.ReadAsStringAsync();
-            var recipeResponce = JsonConvert.DeserializeObject<IEnumerable<FullRecipe>>(jsonString);
-            return recipeResponce!.FirstOrDefault()!;
+            var recipeResponce = JsonConvert.DeserializeObject<IEnumerable<FullRecipe>>(jsonString)!.FirstOrDefault()!;
+
+            //extract the steps from the json object
+            var recipeInstructions = JsonConvert.DeserializeObject<dynamic>(jsonString)!;
+            recipeResponce.Steps = recipeInstructions[0]!.analyzedInstructions[0].steps.ToObject<IEnumerable<RecipeStep>>();
+            return recipeResponce;
         }
 
         public async Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID)
@@ -128,5 +116,6 @@ namespace ServiceAgent.Spoonacular
 
             return jsonObject!.results.ToObject<IEnumerable<Ingridient>>();
         }
+        #endregion
     }
 }

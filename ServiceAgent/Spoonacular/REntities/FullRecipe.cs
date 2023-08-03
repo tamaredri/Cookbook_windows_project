@@ -22,21 +22,26 @@ namespace ServiceAgent.Spoonacular.REntities
         [JsonProperty("extendedIngredients")]
         public IEnumerable<IngridientInRecipe>? Ingridients { get; set; }
 
-        [JsonProperty("analyzedInstructions")]
-        public IEnumerable<Instruction>? AnalyzedInstructions { get; set; }
+        //[JsonProperty("analyzedInstructions")]
+        public IEnumerable<RecipeStep>? Steps { get; set; }
 
         public override string? ToString()
         {
             string? ingridientsDescription = "";
             if (Ingridients != null)
                 foreach (var i in Ingridients)
-                    ingridientsDescription += $"{i}\n";       
-            
+                    ingridientsDescription += $"{i}\n";
+
+            string? recipeStepDescription = "";
+            if (Steps != null)
+                foreach (var s in Steps)
+                    recipeStepDescription += $"{s}\n";
+
             return $"Full recipe:\n{base.ToString()}\n" +
                    $"Suitable for {Servings} people.\n\n" +
                    $"Summary:\n{Summary}\n\n" +
                    $"Ingridients:\n{ingridientsDescription}\n\n" +
-                   $"Steps:\n{AnalyzedInstructions!.FirstOrDefault()}";
+                   $"Steps:\n{recipeStepDescription}";
         }
     }
 }
