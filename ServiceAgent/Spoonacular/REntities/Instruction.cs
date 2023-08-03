@@ -10,7 +10,7 @@ namespace ServiceAgent.Spoonacular.REntities
     public class Instruction
     {
         [JsonProperty("steps")]
-        public List<RecipeStep>? Steps { get; set; }
+        public IEnumerable<RecipeStep>? Steps { get; set; }
 
         public override string? ToString()
         {

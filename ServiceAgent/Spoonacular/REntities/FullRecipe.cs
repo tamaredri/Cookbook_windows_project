@@ -20,10 +20,10 @@ namespace ServiceAgent.Spoonacular.REntities
         public string? Summary { get; set; }
 
         [JsonProperty("extendedIngredients")]
-        public List<IngridientInRecipe>? Ingridients { get; set; }
+        public IEnumerable<IngridientInRecipe>? Ingridients { get; set; }
 
         [JsonProperty("analyzedInstructions")]
-        public List<Instruction>? AnalyzedInstructions { get; set; }
+        public IEnumerable<Instruction>? AnalyzedInstructions { get; set; }
 
         public override string? ToString()
         {
