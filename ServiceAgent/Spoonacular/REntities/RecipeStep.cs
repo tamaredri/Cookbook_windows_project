@@ -17,7 +17,7 @@ namespace ServiceAgent.Spoonacular.REntities
 
         public override string? ToString()
         {
-            return base.ToString();
+            return $"number: {Number}, step: {Step}.";
         }
     }
 }

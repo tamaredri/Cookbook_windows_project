@@ -11,7 +11,7 @@ namespace ServiceAgent.Spoonacular.REntities
     public class RecipeCollection
     {
         [JsonProperty("results")]
-        public IEnumerable<Recipe>? Recipes { get; set; }
+        public IEnumerable<Recipe>? Recipes { get; set; } = new List<Recipe>();
 
         [JsonProperty("number")]
         public int? Number { get; set; }
@@ -21,7 +21,15 @@ namespace ServiceAgent.Spoonacular.REntities
 
         public override string? ToString()
         {
-            return base.ToString();
+            string? result = "Recipe:\n";
+
+            foreach(Recipe recipe in Recipes!)
+            {
+                result += $"{recipe}\n";
+            }
+
+            result += $"number: {Number}, total result: {TotalResult}.";
+            return result;
         }
     }
 }

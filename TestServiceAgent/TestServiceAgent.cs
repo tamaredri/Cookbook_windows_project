@@ -31,7 +31,7 @@ namespace ServiceAgent
 
             foreach (Recipe recipe in recipes)
             {
-                Console.WriteLine($"id: {recipe.ID} title: {recipe.Title} image: {recipe.Image}");
+                Console.WriteLine(recipe);
             }
         }
 
@@ -42,14 +42,14 @@ namespace ServiceAgent
 
             foreach (Recipe recipe in recipes)
             {
-                Console.WriteLine($"id: {recipe.ID} title: {recipe.Title} image: {recipe.Image}");
+                Console.WriteLine(recipe);
             }
         }
 
         private static void testSearchByID(ISpoonacularService _spoonacular)
         {
             var specificRecipe = _spoonacular.getRecipeById(716429).GetAwaiter().GetResult();
-            Console.WriteLine($"id: {specificRecipe.ID} title: {specificRecipe.Title} image: {specificRecipe.Image}");
+            Console.WriteLine(specificRecipe);
         }
 
         

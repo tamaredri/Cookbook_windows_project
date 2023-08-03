@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ServiceAgent.Spoonacular.REntities
 {
@@ -22,7 +23,7 @@ namespace ServiceAgent.Spoonacular.REntities
 
         public override string? ToString()
         {
-            return base.ToString();
+            return $"ID: {ID},  name: {Name}, amount: {Amount}, unit: {Unit}, image: {Image}.";
         }
     }
 }
