@@ -19,5 +19,10 @@ namespace ServiceAgent.Spoonacular.REntities
 
         [JsonProperty("unit")]
         public string? Unit { get; set; }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

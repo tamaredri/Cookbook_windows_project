@@ -18,5 +18,10 @@ namespace ServiceAgent.Spoonacular.REntities
 
         [JsonProperty("image")]
         public string? Image { get; set; }
+
+        public override string? ToString()
+        {
+            return $"ID: {ID}, title: {Title}, image: {Image}.";
+        }
     }
 }

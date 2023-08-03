@@ -18,5 +18,10 @@ namespace ServiceAgent.Spoonacular.REntities
 
         [JsonProperty("totalResult")]
         public int? TotalResult { get; set; }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

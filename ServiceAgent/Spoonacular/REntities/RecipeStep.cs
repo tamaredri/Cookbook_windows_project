@@ -14,5 +14,10 @@ namespace ServiceAgent.Spoonacular.REntities
 
         [JsonProperty("step")]
         public string? Step { get; set;}
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

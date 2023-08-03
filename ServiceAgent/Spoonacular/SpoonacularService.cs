@@ -84,7 +84,7 @@ namespace ServiceAgent.Spoonacular
             return JsonConvert.DeserializeObject<IEnumerable<Recipe>>(jsonString)!;
         }
 
-        public async Task<Recipe> getRecipeById(int ID)
+        public async Task<FullRecipe> getRecipeById(int ID)
         {
             parameters = $"recipes/informationBulk?ids={ID}";
 
@@ -94,9 +94,8 @@ namespace ServiceAgent.Spoonacular
                 throw new Exception("response StatusCode is error");
             }
             var jsonString = await response.Content.ReadAsStringAsync();
-            var recipeResponce = JsonConvert.DeserializeObject<Recipe>(jsonString);
-            return recipeResponce!;
-
+            var recipeResponce = JsonConvert.DeserializeObject<IEnumerable<FullRecipe>>(jsonString);
+            return recipeResponce!.FirstOrDefault()!;
         }
 
         public Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID)

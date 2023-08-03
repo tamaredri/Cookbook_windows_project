@@ -21,7 +21,7 @@ namespace ServiceAgent
             //var _spoonacular = application.Services.GetRequiredService<ISpoonacularService>();
             ISpoonacularService _spoonacular = new SpoonacularService();
             testFreeSearch(_spoonacular);
-            //testSearchByID(_spoonacular);
+            testSearchByID(_spoonacular);
             testSearchByIngridient(_spoonacular);
         }
 
