@@ -41,7 +41,7 @@ namespace ServiceAgent.Spoonacular.REntities
                    $"Suitable for {Servings} people.\n\n" +
                    $"Summary:\n{Summary}\n\n" +
                    $"Ingridients:\n{ingridientsDescription}\n\n" +
-                   $"Steps:\n{Steps}";
+                   $"Steps:\n{recipeStepDescription}";
         }
     }
 }
