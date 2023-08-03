@@ -100,7 +100,7 @@ namespace ServiceAgent.Spoonacular
 
         public async Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID)
         {
-            parameters = $"recipes/{ID}/similar?";
+            Parameters = $"recipes/{ID}/similar?";
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
 
@@ -124,8 +124,9 @@ namespace ServiceAgent.Spoonacular
             }
 
             var jsonString = await response.Content.ReadAsStringAsync();
-            var recipeResponce = JsonConvert.DeserializeObject<IEnumerable<Ingridient>>(jsonString);
-            return recipeResponce!;
+            var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
+
+            return jsonObject!.results.ToObject<IEnumerable<Ingridient>>();
         }
     }
 }

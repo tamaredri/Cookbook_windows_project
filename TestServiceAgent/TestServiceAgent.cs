@@ -27,6 +27,17 @@ namespace ServiceAgent
             testSearchByIngridient(_spoonacular);
             Console.WriteLine("-------------------------------------------------------------------------");
             testGetSimilarRecipe(_spoonacular);
+            Console.WriteLine("-------------------------------------------------------------------------");
+            testGetMatchingIngridients(_spoonacular);
+        }
+
+        private static void testGetMatchingIngridients(ISpoonacularService _spoonacular)
+        {
+            var ingridients = _spoonacular.GetMatchingIngridients("banana").GetAwaiter().GetResult();
+            foreach (Ingridient ingridient in ingridients)
+            {
+                Console.WriteLine(ingridient);
+            }
         }
 
         private static void testGetSimilarRecipe(ISpoonacularService _spoonacular)
