@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="Presentation.Views.UserRecipeInformation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentation.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="grid" DataContext="{Binding SuccessData}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="yourImagesTitle"
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                    Text="YOUR IMAGES:" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                       FontFamily="Candara" FontWeight="Black"/>
+
+            <Border x:Name="imagesBorder"  Grid.Column="1"
+                CornerRadius="5"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Height="115" Margin="0 0 15 0" VerticalAlignment="Center">
+
+                <ScrollViewer x:Name="yourImagesList" HorizontalScrollBarVisibility="Auto" Background="Transparent">
+                    <StackPanel>
+                        <ItemsControl x:Name="ListOfImages" ItemsSource="{Binding Images}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="110"  HorizontalAlignment="Center"
+                                            Margin="8 4 4 8">
+                                        <Image Source ="{Binding}"></Image>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+
+            <Rectangle Width="600" Height="1" 
+                       Fill="Black"
+                       Margin="0 5 0 0"
+                       HorizontalAlignment="Center"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel x:Name="ratingAndComments" 
+                            Orientation="Vertical"
+                            Grid.Column="0" >
+
+                    <materialDesign:RatingBar
+                            x:Name="BasicRatingBar"
+                            Padding="10 15 10 10"
+                            Value="3" Width="140"/>
+
+                    <TextBox x:Name="comment"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Margin="10"
+                             materialDesign:HintAssist.Hint="This is a text area" Width="330" Height="152"/>
+
+                    <Button x:Name="editComment"
+                            Grid.Column="1"
+                            Style="{StaticResource MaterialDesignPaperDarkButton}"
+                            Width="60" Height="30"
+                            ToolTip="Resource name: MaterialDesignPaperDarkButton"
+                            Content="EDIT" 
+                            Background="Transparent"/>
+
+                </StackPanel>
+
+                <StackPanel x:Name="date" Grid.Column="1" 
+                            Orientation="Vertical">
+
+                    <DatePicker x:Name="datePicker"
+                            Margin="10 30 10 10"
+                            Width="140"
+                            materialDesign:HintAssist.Hint="Pick Date"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" Grid.Column="1" VerticalAlignment="Top" />
+
+                    <Button x:Name="serchRecipeByIngredient"
+                            Margin="10"
+                            Grid.Column="1"
+                            Style="{StaticResource MaterialDesignPaperDarkButton}"
+                            Width="100" Height="40"
+                            ToolTip="Resource name: MaterialDesignPaperDarkButton"
+                            Content="SEARCH" 
+                            Background="Transparent"/>
+
+                    <Button x:Name="findSimilarRecipes"
+                            Grid.Column="1"
+                            Style="{StaticResource MaterialDesignPaperDarkButton}"
+                            Width="190" Height="40"
+                            Margin="10"
+                            ToolTip="Resource name: MaterialDesignPaperDarkButton"
+                            Content="Search for Similar Recipes" 
+                            Background="Transparent"/>
+
+
+
+
+                </StackPanel>
+               
+
+            </Grid>
+
+
+
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

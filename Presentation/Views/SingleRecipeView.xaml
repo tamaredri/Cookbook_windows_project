@@ -44,7 +44,7 @@
                         </Border.Effect>
                         <TextBlock Text="30" FontFamily="Courier New"
                            FontWeight="Bold"
-                           FontSize="30"/>
+                           FontSize="20"/>
                     </Border>
                 </StackPanel>
                     
@@ -68,7 +68,7 @@
                         </Border.Effect>
                         <TextBlock Text="12" FontFamily="Courier New"
                            FontWeight="Bold"
-                           FontSize="30"/>
+                           FontSize="20"/>
                     </Border>
                 </StackPanel>
 
@@ -101,7 +101,7 @@
                             Margin="0 10 0 10" Height="140">
                     <Image MaxWidth="200" 
                            MaxHeight="120" 
-                           Margin="10 0 0 0"
+                           Margin="15 0 0 0"
                            Source="https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg"/>
 
                     <TextBlock TextWrapping="Wrap" 
@@ -110,13 +110,19 @@
                                Style="{StaticResource MaterialDesignBody2TextBlock}"
                                Padding="20 10 20 10"
                                MaxWidth="500"
-                               
+                               Margin="5 0 0 0"
                                Text="This banana bread recipe creates the most delicious, moist loaf with loads of banana flavor. Why compromise the banana flavor? Friends and family love my recipe and say it's by far the best! It tastes wonderful toasted. Enjoy!" Width="405"/>
                 </StackPanel>
 
-                <Rectangle Width="400" Height="1" Fill="Black"/>
+                <Rectangle Width="400" Height="1" 
+                           Fill="Black"
+                           HorizontalAlignment="Left"
+                           Margin="15 0 0 0"/>
                 
-                <StackPanel Name="IngredientsTitle" Orientation="Horizontal">
+                <StackPanel Name="IngredientsTitle" 
+                            Orientation="Horizontal"
+                            Margin="10">
+                    
                     <Image MaxWidth="40" 
                                MaxHeight="40" 
                                Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\ingredients.png" RenderTransformOrigin="0.45,0.478"/>
@@ -129,7 +135,8 @@
                                    Margin="10"/>
                 </StackPanel>
                 
-                <StackPanel Name="Ingredients" Orientation="Vertical">
+                <StackPanel Name="Ingredients" Orientation="Vertical"
+                            Margin="0 0 0 5">
                     <ItemsControl x:Name="IngridientsItems" ItemsSource="{Binding RecipeStep}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -149,11 +156,16 @@
                     </ItemsControl>
                 </StackPanel>
 
-                <Rectangle Width="400" Height="1" Fill="Black"/>
+
+                <Rectangle Width="400" Height="1" 
+                           Fill="Black"
+                           HorizontalAlignment="Left"
+                           Margin="15,0,0,0"/>
 
                 <StackPanel Name="StepsTitle" Orientation="Horizontal">
                     <Image MaxWidth="40" 
                                MaxHeight="40" 
+                               Margin="10"
                                Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\process.png"/>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    Text="Steps:" 
@@ -163,7 +175,10 @@
                                    FontWeight="ExtraBold"
                                    FontSize="20"/>
                 </StackPanel>
-                <StackPanel Name="Steps" Orientation="Vertical">
+                
+                <StackPanel Name="Steps" 
+                            Orientation="Vertical"
+                            Margin="0 0 0 5">
                     <ItemsControl x:Name="StepsItems" ItemsSource="{Binding RecipeStep}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
