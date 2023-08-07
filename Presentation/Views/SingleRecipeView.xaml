@@ -5,8 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Presentation.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="600" Background="#E1D4BB">
+    <StackPanel Orientation="Vertical">
+        <DockPanel Name="titleAndInfo">
+            <StackPanel DockPanel.Dock="Right" 
+                        Orientation="Horizontal"
+                        Margin="0 0 5 0">
+                <Image Width="25" 
+                       Height="25" 
+                       Margin="5" 
+                       Source="..\Images\kitchen-timer.png"/>
+
+                <Label Content="3" 
+                       HorizontalAlignment="Center" 
+                       Margin="5"/>
+
+                <Image Width="25" Height="25" 
+                       Margin="10 5 5 5" 
+                       Source="..\Images\dining-number.png"/>
+
+                <Label Content="30" 
+                       HorizontalAlignment="Center" 
+                       Margin="5"/>
+            </StackPanel>
             
-    </Grid>
+            
+            <Label DockPanel.Dock="Left" Content="Banana Cream Cake"/>
+        </DockPanel>
+        <StackPanel Name="imageAndSummary" Orientation="Horizontal" Margin="0 10 0 10">
+            <Image Width="240" Height="160" Source="{Binding Image}"/>
+            <TextBlock Text="{Binding Summary}"/>
+        </StackPanel>
+        
+    </StackPanel>
 </UserControl>
