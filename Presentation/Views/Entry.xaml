@@ -19,7 +19,7 @@
                 Margin="0 0 15 0"
                 BorderThickness="0.7">
             <TextBlock Text="FREE SEARCH" 
-                       FontSize="25"
+                       FontSize="20"
                        Foreground="Black"/>
         </Button>
 
@@ -31,7 +31,7 @@
                 Margin="15 0 0 0"
                 BorderThickness="0.7">
             <TextBlock Text="INGREDIENTS SEARCH"
-                       FontSize="25"
+                       FontSize="20"
                            Foreground="Black"/>
         </Button>
 

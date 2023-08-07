@@ -23,10 +23,11 @@
     
     <Grid Background="#EEEEEE">
 
-        <!--<views:RecipeResultsListView Loaded="SearchIngredient_Loaded"/>-->
-        <!--<views:SingleRecipeView ></views:SingleRecipeView >-->
+        <!--<views:RecipeResultsListView Loaded="SearchIngredient_Loaded" Height="450" Width="790"/>-->
+        <views:SingleRecipeView ></views:SingleRecipeView >
         <!--<views:selectedIngredientsList></views:selectedIngredientsList>-->
         <!--<views:UserRecipeInformation></views:UserRecipeInformation>-->
-        <views:FreeSearch></views:FreeSearch>
+        <!--<views:FreeSearch></views:FreeSearch>-->
+        <!--<views:Entry></views:Entry>-->
     </Grid>
 </Window>

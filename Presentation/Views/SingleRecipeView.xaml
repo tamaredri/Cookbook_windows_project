@@ -30,7 +30,10 @@
                             Orientation="Horizontal"
                             Margin="10,0,10,0">
                     <Border Width="30">
-                        <Image Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\kitchen-timer.png"/>
+                        <materialDesign:PackIcon Kind="TimerOutline"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                 Width="30" Height="30"/>
                     </Border>
                     <Border x:Name="preparationTime"
                            Margin="2"
@@ -54,7 +57,13 @@
                             Orientation="Horizontal"
                             Margin="10,0,10,0">
                     <Border Width="30">
-                        <Image Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\dining-number.png"/>
+                        
+                        <materialDesign:PackIcon Kind="TableChair"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                 Width="30" Height="30"/>
+                        <!--<Image Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\dining-number.png"/>-->
+                        
                     </Border>
                     <Border x:Name="amountDiners"
                            Margin="2"
@@ -122,10 +131,13 @@
                 <StackPanel Name="IngredientsTitle" 
                             Orientation="Horizontal"
                             Margin="10">
-                    
-                    <Image MaxWidth="40" 
+                    <materialDesign:PackIcon Kind="FoodVariant"
+                                             Width="40" 
+                                             Height="40"/>
+                    <!--<Image MaxWidth="40" 
                                MaxHeight="40" 
-                               Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\ingredients.png" RenderTransformOrigin="0.45,0.478"/>
+                               Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\ingredients.png" RenderTransformOrigin="0.45,0.478"/>-->
+                    
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    Text="Ingredients:" 
                                    VerticalAlignment="Center"
@@ -163,14 +175,17 @@
                            Margin="15,0,0,0"/>
 
                 <StackPanel Name="StepsTitle" Orientation="Horizontal">
-                    <Image MaxWidth="40" 
+                    <materialDesign:PackIcon Kind="ClipboardText" Width="40" 
+                               Height="40" 
+                               Margin="10"/>
+                    <!--<Image MaxWidth="40" 
                                MaxHeight="40" 
                                Margin="10"
-                               Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\process.png"/>
+                               Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\process.png"/>-->
+                    
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    Text="Steps:" 
                                    VerticalAlignment="Center"
-                                   Margin="10"
                                    FontFamily="Candara"
                                    FontWeight="ExtraBold"
                                    FontSize="20"/>
