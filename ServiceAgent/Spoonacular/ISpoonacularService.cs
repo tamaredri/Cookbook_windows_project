@@ -18,11 +18,11 @@ namespace ServiceAgent.Spoonacular
         Task<IEnumerable<Recipe>> GetRecipiesByFreeSearch(string query);
 
         /// <summary>
-        /// Request a list of recipes from Spoonacular that use the requesteg ingridients.
+        /// Request a list of recipes from Spoonacular that use the requesteg ingredients.
         /// </summary>
-        /// <param name="ingridients">collections of ingridients for the search</param>
-        /// <returns>collection of recipes using the ingridients</returns>
-        Task<IEnumerable<Recipe>> GetRecipiesByIngridients(IEnumerable<Ingridient> ingridients);
+        /// <param name="ingredients">collections of ingredients for the search</param>
+        /// <returns>collection of recipes using the ingredients</returns>
+        Task<IEnumerable<Recipe>> GetRecipiesByIngredients(IEnumerable<Ingredient> ingredients);
 
         /// <summary>
         /// Request a specific recipe using an ID number.
@@ -39,11 +39,11 @@ namespace ServiceAgent.Spoonacular
         Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID);
 
         /// <summary>
-        /// Request 10 ingridients that match the ingridients query
+        /// Request 10 ingredients that match the ingredients query
         /// </summary>
-        /// <param name="ingridient">ingridient name to search</param>
-        /// <returns>collection of matching ingridients</returns>
-        Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient);
+        /// <param name="ingredient">ingredient name to search</param>
+        /// <returns>collection of matching ingredients</returns>
+        Task<IEnumerable<Ingredient>> GetMatchingIngredients(string ingredient);
     }
 }
 

@@ -53,14 +53,14 @@ namespace ServiceAgent.Spoonacular
             return jsonObject!.results.ToObject<IEnumerable<Recipe>>();
         }
 
-        public async Task<IEnumerable<Recipe>> GetRecipiesByIngridients(IEnumerable<Ingridient> ingridients)
+        public async Task<IEnumerable<Recipe>> GetRecipiesByIngredients(IEnumerable<Ingredient> ingredients)
         {
-            if (!ingridients.Any())
+            if (!ingredients.Any())
                 return new List<Recipe>();
             
             Parameters = $"recipes/findByIngredients?ingredients=";
-            foreach (Ingridient ingridient in ingridients)
-                    Parameters += ",+" + ingridient.Name;
+            foreach (Ingredient ingredient in ingredients)
+                    Parameters += ",+" + ingredient.Name;
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
@@ -101,9 +101,9 @@ namespace ServiceAgent.Spoonacular
             return JsonConvert.DeserializeObject<IEnumerable<Recipe>>(jsonString)!;
         }
 
-        public async Task<IEnumerable<Ingridient>> GetMatchingIngridients(string ingridient)
+        public async Task<IEnumerable<Ingredient>> GetMatchingIngredients(string ingredient)
         {
-            Parameters = $"food/ingredients/search?query={ingridient}&number=10";
+            Parameters = $"food/ingredients/search?query={ingredient}&number=10";
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
@@ -114,7 +114,7 @@ namespace ServiceAgent.Spoonacular
             var jsonString = await response.Content.ReadAsStringAsync();
             var jsonObject = JsonConvert.DeserializeObject<dynamic>(jsonString);
 
-            return jsonObject!.results.ToObject<IEnumerable<Ingridient>>();
+            return jsonObject!.results.ToObject<IEnumerable<Ingredient>>();
         }
         #endregion
     }

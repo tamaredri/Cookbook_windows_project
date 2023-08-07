@@ -20,7 +20,7 @@ namespace ServiceAgent.Spoonacular.REntities
         public string? Summary { get; set; }
 
         [JsonProperty("extendedIngredients")]
-        public IEnumerable<IngridientInRecipe>? Ingridients { get; set; }
+        public IEnumerable<IngredientInRecipe>? Ingridients { get; set; }
 
         //[JsonProperty("analyzedInstructions")]
         public IEnumerable<RecipeStep>? Steps { get; set; }

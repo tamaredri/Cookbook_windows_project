@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace ServiceAgent.Spoonacular.REntities
 {
-    public class IngridientInRecipe : Ingridient
+    public class IngredientInRecipe : Ingredient
     {
         //name, image
 
