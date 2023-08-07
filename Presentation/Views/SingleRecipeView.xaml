@@ -12,7 +12,7 @@
         <FontFamily x:Key="CustomFontFamily">./Fonts/#Bebas Neue</FontFamily>
     </UserControl.Resources>-->
 
-    <Grid>
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.8*"/>
@@ -26,25 +26,68 @@
                        Margin="5" 
                        Source="..\Images\kitchen-timer.png"/>-->
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                           Text="30" Padding="10"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
+                <StackPanel x:Name="timeStack" 
+                            Orientation="Horizontal"
+                            Margin="10,0,10,0">
+                    <Border Width="30">
+                        <Image Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\kitchen-timer.png"/>
+                    </Border>
+                    <Border x:Name="preparationTime"
+                           Margin="2"
+                           Padding="3"
+                           Background="#EEEEEE"
+                           BorderBrush="Black"
+                           BorderThickness="0.2"
+                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" Opacity="0.2" Color="Gray"/>
+                        </Border.Effect>
+                        <TextBlock Text="30" FontFamily="Courier New"
+                           FontWeight="Bold"
+                           FontSize="30"/>
+                    </Border>
+                </StackPanel>
+                    
+
+
+                    <StackPanel x:Name="amountDiningStack" 
+                            Orientation="Horizontal"
+                            Margin="10,0,10,0">
+                    <Border Width="30">
+                        <Image Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\dining-number.png"/>
+                    </Border>
+                    <Border x:Name="amountDiners"
+                           Margin="2"
+                           Padding="3"
+                           Background="#EEEEEE"
+                           BorderBrush="Black"
+                           BorderThickness="0.2"
+                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" Opacity="0.2" Color="Gray"/>
+                        </Border.Effect>
+                        <TextBlock Text="12" FontFamily="Courier New"
+                           FontWeight="Bold"
+                           FontSize="30"/>
+                    </Border>
+                </StackPanel>
+
+
+                
 
                 <!--<Image Width="45" 
                        Height="45" 
                        Margin="10 5 5 5" 
                        Source="..\Images\dining-number.png"/>-->
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                           Text="12" Padding="5"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
+                
             </StackPanel>
 
             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                        Text="Banana Cream Cake" VerticalAlignment="Center" 
-                       
+                       FontFamily="Candara"
+                       FontWeight="ExtraBold"
+                       FontSize="40"
                        Margin="10,0,0,0"
                        HorizontalAlignment="Left"/>
         </DockPanel>
@@ -58,15 +101,17 @@
                             Margin="0 10 0 10" Height="140">
                     <Image MaxWidth="200" 
                            MaxHeight="120" 
+                           Margin="10 0 0 0"
                            Source="https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg"/>
 
                     <TextBlock TextWrapping="Wrap" 
                                VerticalAlignment="Center"
+                               FontFamily="Calibri"
                                Style="{StaticResource MaterialDesignBody2TextBlock}"
                                Padding="20 10 20 10"
                                MaxWidth="500"
-                               FontFamily="{DynamicResource CustomFontFamily}"
-                               Text="This banana bread recipe creates the most delicious, moist loaf with loads of banana flavor. Why compromise the banana flavor? Friends and family love my recipe and say it's by far the best! It tastes wonderful toasted. Enjoy!" Width="358"/>
+                               
+                               Text="This banana bread recipe creates the most delicious, moist loaf with loads of banana flavor. Why compromise the banana flavor? Friends and family love my recipe and say it's by far the best! It tastes wonderful toasted. Enjoy!" Width="405"/>
                 </StackPanel>
 
                 <StackPanel Name="IngredientsTitle" Orientation="Horizontal">
@@ -76,8 +121,10 @@
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    Text="Ingredients:" 
                                    VerticalAlignment="Center"
-                                   Margin="10"
-                                   FontFamily="{DynamicResource CustomFontFamily}"/>
+                                   FontFamily="Candara"
+                                   FontWeight="ExtraBold"
+                                   FontSize="20"
+                                   Margin="10"/>
                 </StackPanel>
                 <StackPanel Name="Ingredients" Orientation="Vertical">
                     <ItemsControl x:Name="IngridientsItems" ItemsSource="{Binding RecipeStep}">
@@ -88,6 +135,7 @@
                                         <materialDesign:PackIcon Kind="CircleSmall" />
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
                                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   FontFamily="Calibri"
                                                    Text="{Binding Name}" 
                                                    MaxWidth="500"
                                                    FontSize="15"/>
@@ -106,22 +154,32 @@
                                    Text="Steps:" 
                                    VerticalAlignment="Center"
                                    Margin="10"
-                                   FontFamily="{DynamicResource CustomFontFamily}"/>
+                                   FontFamily="Candara"
+                                   FontWeight="ExtraBold"
+                                   FontSize="20"/>
                 </StackPanel>
                 <StackPanel Name="Steps" Orientation="Vertical">
                     <ItemsControl x:Name="StepsItems" ItemsSource="{Binding RecipeStep}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10">
-                                    <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
                                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
                                                    Text="{Binding Number}" 
                                                    MaxWidth="500"
                                                    FontSize="15"/>
+
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
+                                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   Text=". " 
+                                                   MaxWidth="500"
+                                                   FontSize="15"/>
+
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
                                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
                                                    Text="{Binding Step}" 
+                                                   FontFamily="Calibri"
                                                    MaxWidth="500"
                                                    FontSize="15"/>
                                     </StackPanel>

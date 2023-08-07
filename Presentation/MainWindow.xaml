@@ -16,10 +16,10 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" Height="450" Width="800">
 
-    <Window.Resources>
-        <!-- Define the FontFamily for the MainWindow as DynamicResource -->
+    <!--<Window.Resources>
+        --><!-- Define the FontFamily for the MainWindow as DynamicResource --><!--
         <FontFamily x:Key="CustomFontFamily" x:Shared="False">./Views/Fonts/#Bebas Neue</FontFamily>
-    </Window.Resources>
+    </Window.Resources>-->
     
     <Grid Background="#EEEEEE">
 
