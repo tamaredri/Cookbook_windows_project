@@ -114,6 +114,8 @@
                                Text="This banana bread recipe creates the most delicious, moist loaf with loads of banana flavor. Why compromise the banana flavor? Friends and family love my recipe and say it's by far the best! It tastes wonderful toasted. Enjoy!" Width="405"/>
                 </StackPanel>
 
+                <Rectangle Width="400" Height="1" Fill="Black"/>
+                
                 <StackPanel Name="IngredientsTitle" Orientation="Horizontal">
                     <Image MaxWidth="40" 
                                MaxHeight="40" 
@@ -126,6 +128,7 @@
                                    FontSize="20"
                                    Margin="10"/>
                 </StackPanel>
+                
                 <StackPanel Name="Ingredients" Orientation="Vertical">
                     <ItemsControl x:Name="IngridientsItems" ItemsSource="{Binding RecipeStep}">
                         <ItemsControl.ItemTemplate>
@@ -145,6 +148,8 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
+
+                <Rectangle Width="400" Height="1" Fill="Black"/>
 
                 <StackPanel Name="StepsTitle" Orientation="Horizontal">
                     <Image MaxWidth="40" 

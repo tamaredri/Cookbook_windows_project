@@ -14,14 +14,28 @@
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="searchIngredient"
+        <StackPanel Orientation="Horizontal">
+            <ComboBox x:Name="searchIngredient"
                   materialDesign:HintAssist.Hint="Search"
                   materialDesign:HintAssist.HintOpacity=".26"
                   IsEditable="True"
                   HorizontalAlignment="Left"
                   Width="300"
                   Margin="10,5,5,5">
-        </ComboBox>
+            </ComboBox>
+
+            <Button Name="addIngredient" Grid.Row="1"
+            Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                BorderBrush="Transparent" Width="56" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Margin="20,0,20,20" Background="Gray">
+                <materialDesign:PackIcon Kind="Plus" 
+                                         Foreground="Black"
+                                         Height="30" Width="30"/>
+            </Button>
+        </StackPanel>
+        
 
 
     </Grid>

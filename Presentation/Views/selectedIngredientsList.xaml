@@ -11,17 +11,31 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="searchIngredient"
+        <StackPanel Orientation="Horizontal">
+            <ComboBox x:Name="searchIngredient"
                   materialDesign:HintAssist.Hint="Search"
                   materialDesign:HintAssist.HintOpacity=".26"
                   IsEditable="True"
                   HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
                   Width="300"
-                  Margin="10,5,5,5">
-        </ComboBox>
-        
+                  Margin="10,5,5,10">
+            </ComboBox>
+
+            <Button Name="addIngredient" Grid.Row="1"
+            Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                BorderBrush="Transparent" Width="40" Height="40"
+                VerticalAlignment="Bottom"
+                Margin="10,0,0,10" Background="Gray">
+                <materialDesign:PackIcon Kind="Plus" 
+                                         Foreground="Black"
+                                         Height="30" Width="30"/>
+            </Button>
+        </StackPanel>
+
         <Border x:Name="slectedIngredients"  Grid.Row="1"
                 CornerRadius="5"
                 BorderBrush="Black"
@@ -31,20 +45,20 @@
             <ScrollViewer>
                 <StackPanel>
                     <StackPanel Margin="20 0">
-                        <ItemsControl x:Name="ListViewIngredients" ItemsSource="{Binding Ingredient}">
+                        <ItemsControl x:Name="ListViewIngredients" Margin="0,10,0,0" ItemsSource="{Binding Ingredient}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
 
                                     <materialDesign:Chip x:Name="selectedIngredient"
-                                        Content="{Binding Name}"
-                                        IsDeletable="True"
-                                        DeleteClick="ButtonsDemoChip_OnDeleteClick"
-                                        ToolTip="Just a tool tip"
-                                        DeleteToolTip="Your friendly neighbor delete button">
-                                        <materialDesign:Chip.Icon>
-                                            <Image
-                                                Source="{Binding Image}" />
-                                        </materialDesign:Chip.Icon>
+                                                        Margin="7,7,0,0"
+                                                        Width="150" Height="40"
+                                                        Content="{Binding Name}"
+                                                        FontFamily="Calibri"
+                                                        FontSize="15"
+                                                        IsDeletable="True"
+                                                        DeleteClick="ButtonsDemoChip_OnDeleteClick"
+                                                        ToolTip="Just a tool tip"
+                                                        DeleteToolTip="Your friendly neighbor delete button">
                                     </materialDesign:Chip>
 
                                     <!--<Grid Margin="5" Width="170" Height="115">
@@ -83,10 +97,15 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-
-
-
         </Border>
+
+        <Button x:Name="serchRecipeByIngredient"
+                Grid.Row="2"
+                Style="{StaticResource MaterialDesignPaperDarkButton}"
+                Width="100" Height="40"
+                ToolTip="Resource name: MaterialDesignPaperDarkButton"
+                Content="SEARCH" 
+                Background="Transparent"/>
 
     </Grid>
 </UserControl>
