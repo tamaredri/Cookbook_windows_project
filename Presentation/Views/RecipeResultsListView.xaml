@@ -4,27 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Presentation.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ScrollViewer Background="#FFF1F1F1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                   Text="RESIPE LIST"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        
+        <ScrollViewer Grid.Row="1" Background="Transparent">
             <StackPanel>
                 <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Product}">
+                    <ItemsControl x:Name="ListViewRecipe" ItemsSource="{Binding Recipe}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Width="170" Height="115">
+                                <Border Margin="10" Width="140" Height="115">
                                     <Grid>
-                                        <Border Background="#E1D4BB" Opacity="0.5"></Border>
+                                        <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                                    Padding="32"
+                                                    Content="DEPTH 2" 
+                                                    Background="#EEEEEE" Opacity="0.5"
+                                                    BorderThickness="0.7" BorderBrush="Black"/>
                                         <StackPanel>
                                             <Border Width="120" Height="80" HorizontalAlignment="Center" 
                                                 Margin="0,5">
-                                                <Border.Effect>
-                                                    <DropShadowEffect ShadowDepth="1"/>
-                                                </Border.Effect>
-                                                <Image Source="https://spoonacular.com/recipeImages/655055-556x370.jpg"></Image>
+                                                <Image Source="https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg"></Image>
                                             </Border>
-                                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontSize="15"/>
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontSize="13"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>

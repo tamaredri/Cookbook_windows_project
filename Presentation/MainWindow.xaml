@@ -15,7 +15,15 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <views:SearchRecipe Grid.Row="1"/>
+
+    <Window.Resources>
+        <!-- Define the FontFamily for the MainWindow as DynamicResource -->
+        <FontFamily x:Key="CustomFontFamily" x:Shared="False">./Views/Fonts/#Bebas Neue</FontFamily>
+    </Window.Resources>
+    
+    <Grid Background="#EEEEEE">
+
+        <!--<views:RecipeResultsListView Loaded="SearchIngredient_Loaded"/>-->
+        <views:SingleRecipeView ></views:SingleRecipeView >
     </Grid>
 </Window>

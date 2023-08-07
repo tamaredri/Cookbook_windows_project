@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Presentation.Views.selectedIngredientsList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentation.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="searchIngredient"
+                  materialDesign:HintAssist.Hint="Search"
+                  materialDesign:HintAssist.HintOpacity=".26"
+                  IsEditable="True"
+                  HorizontalAlignment="Left"
+                  Width="300"
+                  Margin="10,5,5,5">
+        </ComboBox>
+        
+        <Border x:Name="slectedIngredients"  Grid.Row="1"
+                CornerRadius="5"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Margin="10">
+
+            <ScrollViewer>
+                <StackPanel>
+                    <StackPanel Margin="20 0">
+                        <ItemsControl x:Name="ListViewIngredients" ItemsSource="{Binding Ingredient}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+
+                                    <materialDesign:Chip x:Name="selectedIngredient"
+                                        Content="{Binding Name}"
+                                        IsDeletable="True"
+                                        DeleteClick="ButtonsDemoChip_OnDeleteClick"
+                                        ToolTip="Just a tool tip"
+                                        DeleteToolTip="Your friendly neighbor delete button">
+                                        <materialDesign:Chip.Icon>
+                                            <Image
+                                                Source="{Binding Image}" />
+                                        </materialDesign:Chip.Icon>
+                                    </materialDesign:Chip>
+
+                                    <!--<Grid Margin="5" Width="170" Height="115">
+
+                                        <Border BorderBrush="Black" 
+                                                BorderThickness="0.7" 
+                                                Background="#EEEEEE">
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="8" Opacity="0.2" 
+                                                                  BlurRadius="10" 
+                                                                  Color="Gray" />
+                                            </Border.Effect>
+                                        </Border>
+
+                                        <StackPanel>
+                                            <Image Source="carrot-leaves.jpg">
+
+                                            </Image>
+
+                                            <TextBlock x:Name="recipeTitle" 
+                                                       HorizontalAlignment="Center" 
+                                                       Text="{Binding Name}" FontSize="13"/>
+
+                                        </StackPanel>
+
+                                    </Grid>-->
+
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+
+
+        </Border>
+
+    </Grid>
+</UserControl>

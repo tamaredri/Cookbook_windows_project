@@ -15,13 +15,13 @@ using System.Windows.Shapes;
 
 namespace Presentation.Views
 {
-    public class Product
+    public class Recipe
     {
         public string Name { get; set; }
         public double Value { get; set; }
         public string Image { get; set; }
 
-        public Product(string name, double value, string image)
+        public Recipe(string name, double value, string image)
         {
             Name = name;
             Value = value;
@@ -41,22 +41,29 @@ namespace Presentation.Views
             InitializeComponent();
             var products = GetProducts();
             if (products.Count > 0)
-                ListViewProducts.ItemsSource = products;
+                ListViewRecipe.ItemsSource = products;
         }
 
-        private List<Product> GetProducts()
+        private List<Recipe> GetProducts()
         {
-            return new List<Product>()
+            return new List<Recipe>()
                 {
-                new Product("Product 1", 205.46, "/Assets/1.jpg"),
-                new Product("Product 2", 102.50, "/Assets/2.jpg"),
-                new Product("Product 3", 400.99, "/Assets/3.jpg"),
-                new Product("Product 4", 350.26, "/Assets/4.jpg"),
-                new Product("Product 5", 150.10, "/Assets/5.jpg"),
-                new Product("Product 6", 100.02, "/Assets/6.jpg"),
-                new Product("Product 7", 295.25, "/Assets/7.jpg"),
-                new Product("Product 8", 700.00, "/Assets/8.jpg")
+                new Recipe("lettuce salad 1", 205.46, "/Assets/1.jpg"),
+                new Recipe("lettuce salad 2", 102.50, "/Assets/2.jpg"),
+                new Recipe("lettuce salad 3", 400.99, "/Assets/3.jpg"),
+                new Recipe("lettuce salad 4", 350.26, "/Assets/4.jpg"),
+                new Recipe("lettuce salad 5", 150.10, "/Assets/5.jpg"),
+                new Recipe("lettuce salad 6", 100.02, "/Assets/6.jpg"),
+                new Recipe("lettuce salad 7", 295.25, "/Assets/7.jpg"),
+                new Recipe("lettuce salad 8", 295.25, "/Assets/7.jpg"),
+                new Recipe("lettuce salad 9", 295.25, "/Assets/7.jpg"),
+                new Recipe("lettuce salad 10", 295.25, "/Assets/7.jpg"),
                 };
+        }
+
+        private void openRecipe(object sender, MouseButtonEventArgs e)
+        {
+            new SingleRecipeWindow();
         }
     }
 }

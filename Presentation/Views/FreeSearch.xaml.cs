@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,16 +16,21 @@ using System.Windows.Shapes;
 
 namespace Presentation.Views
 {
+
+    
+
     /// <summary>
-    /// Interaction logic for searchBar.xaml
+    /// Interaction logic for FreeSearch.xaml
     /// </summary>
-    public partial class searchBar : UserControl
+    public partial class FreeSearch : UserControl
     {
-        public searchBar()
+
+        public FreeSearch()
         {
             InitializeComponent();
-            tb.FilterMode = AutoCompleteFilterMode.Contains;
-            tb.ItemsSource = new string[] { "Ali Raza", "Farhan Rasheed", "Rizwan Rasheed" };
+            
         }
+
+        
     }
 }

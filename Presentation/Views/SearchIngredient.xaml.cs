@@ -16,13 +16,14 @@ using System.Windows.Shapes;
 namespace Presentation.Views
 {
     /// <summary>
-    /// Interaction logic for SearchRecipe.xaml
+    /// Interaction logic for SearchIngredient.xaml
     /// </summary>
-    public partial class SearchRecipe : UserControl
+    public partial class SearchIngredient : UserControl
     {
-        public SearchRecipe()
+        public SearchIngredient()
         {
             InitializeComponent();
+            searchIngredient.ItemsSource = new string[] { "Ali Raza", "Farhan Rasheed", "Rizwan Rasheed" };
         }
     }
 }

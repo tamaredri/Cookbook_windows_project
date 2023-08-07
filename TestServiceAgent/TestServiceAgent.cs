@@ -21,10 +21,10 @@ namespace ServiceAgent
             //var _spoonacular = application.Services.GetRequiredService<ISpoonacularService>();
             ISpoonacularService _spoonacular = new SpoonacularService();
 
-            //testFreeSearch(_spoonacular);
+            testFreeSearch(_spoonacular);
 
             Console.WriteLine("-------------------------------------------------------------------------");
-            testSearchByID(_spoonacular);
+            //testSearchByID(_spoonacular);
 
             Console.WriteLine("-------------------------------------------------------------------------");
             //testSearchByIngridient(_spoonacular);
@@ -38,7 +38,7 @@ namespace ServiceAgent
 
         private static void testGetMatchingIngridients(ISpoonacularService _spoonacular)
         {
-            var ingridients = _spoonacular.GetMatchingIngredients("banana").GetAwaiter().GetResult();
+            var ingridients = _spoonacular.GetMatchingIngredients("carrot").GetAwaiter().GetResult();
             foreach (Ingredient ingridient in ingridients)
             {
                 Console.WriteLine(ingridient);
