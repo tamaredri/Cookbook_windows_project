@@ -81,6 +81,7 @@
                     <TextBox x:Name="comment"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              AcceptsReturn="True"
+                             FontFamily="Calibri"
                              TextWrapping="Wrap"
                              VerticalScrollBarVisibility="Auto"
                              Margin="10"
