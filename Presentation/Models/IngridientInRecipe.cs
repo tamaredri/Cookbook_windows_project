@@ -8,7 +8,7 @@ namespace Presentation.Models
 {
     public class IngridientInRecipe
     {
-        public string? Name { get; }
+        public string? Name { get; set; }
 
         public string? Image { get; }
        

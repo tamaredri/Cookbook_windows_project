@@ -3,39 +3,123 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Presentation.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" Background="#E1D4BB">
-    <StackPanel Orientation="Vertical">
-        <DockPanel Name="titleAndInfo">
+             d:DesignHeight="450" d:DesignWidth="600" Background="#EEEEEE">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Name="titleAndInfo">
             <StackPanel DockPanel.Dock="Right" 
                         Orientation="Horizontal"
                         Margin="0 0 5 0">
-                <Image Width="25" 
-                       Height="25" 
+                <!--<Image Width="30" 
+                       Height="30" 
                        Margin="5" 
-                       Source="..\Images\kitchen-timer.png"/>
+                       Source="..\Images\kitchen-timer.png"/>-->
 
-                <Label Content="3" 
-                       HorizontalAlignment="Center" 
-                       Margin="5"/>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Text="30" Padding="10"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
 
-                <Image Width="25" Height="25" 
+                <!--<Image Width="45" 
+                       Height="45" 
                        Margin="10 5 5 5" 
-                       Source="..\Images\dining-number.png"/>
+                       Source="..\Images\dining-number.png"/>-->
 
-                <Label Content="30" 
-                       HorizontalAlignment="Center" 
-                       Margin="5"/>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Text="12" Padding="5"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
             </StackPanel>
-            
-            
-            <Label DockPanel.Dock="Left" Content="Banana Cream Cake"/>
+
+            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                       Text="Banana Cream Cake" VerticalAlignment="Center"/>
         </DockPanel>
-        <StackPanel Name="imageAndSummary" Orientation="Horizontal" Margin="0 10 0 10">
-            <Image Width="240" Height="160" Source="{Binding Image}"/>
-            <TextBlock Text="{Binding Summary}"/>
-        </StackPanel>
-        
-    </StackPanel>
+
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible">
+            <StackPanel Orientation="Vertical">
+
+                <StackPanel  Name="imageAndSummary" 
+                            Orientation="Horizontal" 
+                            Margin="0 10 0 10" Height="140">
+                    <Image MaxWidth="200" 
+                           MaxHeight="120" 
+                           Source="https://spoonacular.com/recipeImages/655055-556x370.jpg"/>
+
+                    <TextBlock TextWrapping="Wrap" 
+                               VerticalAlignment="Center"
+                               Style="{StaticResource MaterialDesignBody2TextBlock}"
+                               Padding="20 10 20 10"
+                               MaxWidth="500"
+                               Text="This banana bread recipe creates the most delicious, moist loaf with loads of banana flavor. Why compromise the banana flavor? Friends and family love my recipe and say it's by far the best! It tastes wonderful toasted. Enjoy!" Width="358"/>
+                </StackPanel>
+
+                <StackPanel Name="IngredientsTitle" Orientation="Horizontal">
+                    <Image MaxWidth="40" 
+                               MaxHeight="40" 
+                               Source="https://spoonacular.com/recipeImages/655055-556x370.jpg"/>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                                   Text="Ingredients:" 
+                                   VerticalAlignment="Center"
+                                   Margin="10"/>
+                </StackPanel>
+                <StackPanel Name="Ingredients" Orientation="Vertical">
+                    <ItemsControl x:Name="IngridientsItems" ItemsSource="{Binding RecipeStep}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="CircleSmall" />
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
+                                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   Text="{Binding Name}" 
+                                                   MaxWidth="500"
+                                                   FontSize="15"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <StackPanel Name="StepsTitle" Orientation="Horizontal">
+                    <Image MaxWidth="40" 
+                               MaxHeight="40" 
+                               Source="https://spoonacular.com/recipeImages/655055-556x370.jpg"/>
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                                   Text="Steps:" 
+                                   VerticalAlignment="Center"
+                                   Margin="10"/>
+                </StackPanel>
+                <StackPanel Name="Steps" Orientation="Vertical">
+                    <ItemsControl x:Name="StepsItems" ItemsSource="{Binding RecipeStep}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
+                                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   Text="{Binding Number}" 
+                                                   MaxWidth="500"
+                                                   FontSize="15"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
+                                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   Text="{Binding Step}" 
+                                                   MaxWidth="500"
+                                                   FontSize="15"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
