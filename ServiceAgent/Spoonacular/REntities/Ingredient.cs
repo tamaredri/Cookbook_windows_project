@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ServiceAgent.Spoonacular.REntities
 {
-    public class Ingridient
+    public class Ingredient
     {
         [JsonProperty("name")]
         public string? Name { get; set; }
