@@ -7,6 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid x:Name="grid" DataContext="{Binding SuccessData}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -104,13 +105,13 @@
                             materialDesign:HintAssist.Hint="Pick Date"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" Grid.Column="1" VerticalAlignment="Top" />
 
-                    <Button x:Name="serchRecipeByIngredient"
+                    <Button x:Name="saveDate"
                             Margin="10"
                             Grid.Column="1"
                             Style="{StaticResource MaterialDesignPaperDarkButton}"
-                            Width="100" Height="40"
+                            Width="110" Height="40"
                             ToolTip="Resource name: MaterialDesignPaperDarkButton"
-                            Content="SEARCH" 
+                            Content="I Made This" 
                             Background="Transparent"/>
 
                     <Button x:Name="findSimilarRecipes"
@@ -121,19 +122,11 @@
                             ToolTip="Resource name: MaterialDesignPaperDarkButton"
                             Content="Search for Similar Recipes" 
                             Background="Transparent"/>
-
-
-
-
                 </StackPanel>
-               
-
             </Grid>
-
-
-
-
+            
         </StackPanel>
 
     </Grid>
+    
 </UserControl>

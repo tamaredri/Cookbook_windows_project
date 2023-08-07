@@ -17,6 +17,7 @@
         <StackPanel Orientation="Horizontal">
             <ComboBox x:Name="searchIngredient"
                   materialDesign:HintAssist.Hint="Search"
+                  FontFamily="Calibri"
                   materialDesign:HintAssist.HintOpacity=".26"
                   IsEditable="True"
                   HorizontalAlignment="Left"

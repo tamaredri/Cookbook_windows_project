@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Presentation.Views.Entry"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Presentation.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center">
+
+        <Button x:Name="free" 
+                Width="250" Height="70"
+                Background="#EEEEEE"
+                HorizontalAlignment="Left"
+                BorderBrush="Black" 
+                Margin="0 0 15 0"
+                BorderThickness="0.7">
+            <TextBlock Text="FREE SEARCH" 
+                       FontSize="25"
+                       Foreground="Black"/>
+        </Button>
+
+        <Button x:Name="ingredients"
+                Width="250" Height="70"
+                Background="#EEEEEE"
+                HorizontalAlignment="Left"
+                BorderBrush="Black" 
+                Margin="15 0 0 0"
+                BorderThickness="0.7">
+            <TextBlock Text="INGREDIENTS SEARCH"
+                       FontSize="25"
+                           Foreground="Black"/>
+        </Button>
+
+
+    </StackPanel>
+</UserControl>

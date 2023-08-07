@@ -8,37 +8,38 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#EEEEEE">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="6*"></RowDefinition>
-        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+           
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <TextBox x:Name="freeSearchRecipe" Width="550"
-                     HorizontalAlignment="Left"
-                     Text="search.." Margin="10,5, 5,5" 
+            <TextBox x:Name="freeSearchRecipe"
+                     Width="350" Height="60"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     HorizontalAlignment="Right"
+                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                     Text="Chocolate Cake…" 
+                     Margin="0,0, 15,0" 
                      FontSize="22" FontWeight="Medium"
                      BorderBrush="Black"/>
+
+
 
 
             <Button x:Name="SearchButton" 
                     Grid.Column="1"
                     Width="100"
                     Background="#EEEEEE"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
                     BorderBrush="Black" 
+                    Margin="15 0 0 0"
                     BorderThickness="0.7">
                 <TextBlock Text="SEARCH" 
                            Foreground="Black"/>
             </Button>
 
-        </Grid>
+        </StackPanel>
 
 
     </Grid>

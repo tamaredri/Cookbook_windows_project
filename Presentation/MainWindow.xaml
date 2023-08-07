@@ -26,6 +26,7 @@
         <!--<views:RecipeResultsListView Loaded="SearchIngredient_Loaded"/>-->
         <!--<views:SingleRecipeView ></views:SingleRecipeView >-->
         <!--<views:selectedIngredientsList></views:selectedIngredientsList>-->
-        <views:UserRecipeInformation></views:UserRecipeInformation>
+        <!--<views:UserRecipeInformation></views:UserRecipeInformation>-->
+        <views:FreeSearch></views:FreeSearch>
     </Grid>
 </Window>

@@ -19,6 +19,7 @@
                   materialDesign:HintAssist.Hint="Search"
                   materialDesign:HintAssist.HintOpacity=".26"
                   IsEditable="True"
+                  FontFamily="Calibri"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
                   Width="300"
