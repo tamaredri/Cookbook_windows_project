@@ -9,24 +9,24 @@
     <Grid>
         <ScrollViewer Background="#FFF1F1F1">
             <StackPanel>
-                <TextBlock Text="Recipes" Margin="10" FontSize="22" FontWeight="Medium"/>
                 <StackPanel Margin="20 0">
                     <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Product}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Width="110" Height="160">
-                                    <StackPanel>
-                                        <Border Width="100" Height="100" CornerRadius="5" Margin="5">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </Border.Effect>
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding Image}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock Margin="5" Text="{Binding Value, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
-                                        <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="15"/>
-                                    </StackPanel>
+                                <Border Margin="10" Width="170" Height="115">
+                                    <Grid>
+                                        <Border Background="#E1D4BB" Opacity="0.5"></Border>
+                                        <StackPanel>
+                                            <Border Width="120" Height="80" HorizontalAlignment="Center" 
+                                                Margin="0,5">
+                                                <Border.Effect>
+                                                    <DropShadowEffect ShadowDepth="1"/>
+                                                </Border.Effect>
+                                                <Image Source="https://spoonacular.com/recipeImages/655055-556x370.jpg"></Image>
+                                            </Border>
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" FontSize="15"/>
+                                        </StackPanel>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

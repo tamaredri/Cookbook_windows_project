@@ -38,7 +38,7 @@ namespace ServiceAgent
 
         private static void testGetMatchingIngridients(ISpoonacularService _spoonacular)
         {
-            var ingridients = _spoonacular.GetMatchingIngridients("banana").GetAwaiter().GetResult();
+            var ingridients = _spoonacular.GetMatchingIngredients("banana").GetAwaiter().GetResult();
             foreach (Ingredient ingridient in ingridients)
             {
                 Console.WriteLine(ingridient);
@@ -68,7 +68,7 @@ namespace ServiceAgent
         private static void testSearchByIngridient(ISpoonacularService _spoonacular)
         {
             List<Ingredient> ingridients = new List<Ingredient>() { new Ingredient() { Name = "egg" }, new Ingredient() { Name = "banana" } };
-            var recipes = _spoonacular.GetRecipiesByIngridients(ingridients).GetAwaiter().GetResult();
+            var recipes = _spoonacular.GetRecipiesByIngredients(ingridients).GetAwaiter().GetResult();
 
             foreach (Recipe recipe in recipes)
             {
