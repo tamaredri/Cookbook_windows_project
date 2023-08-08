@@ -8,6 +8,8 @@ namespace Presentation.Models
 {
     public class SuccessData
     {
+        public int ID { get; set; }
+
         public int Rating { get; set; }
 
         public string? Comment { get; set; }
