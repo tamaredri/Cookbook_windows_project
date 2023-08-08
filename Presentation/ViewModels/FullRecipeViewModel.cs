@@ -27,8 +27,8 @@ namespace Presentation.ViewModels
         public IEnumerable<RecipeStepViewModel>? Steps => _steps;
 
 
-        private SuccessData? _successData;
-        public SuccessData? SuccessData {
+        private SuccessDataViewModel? _successData;
+        public SuccessDataViewModel? SuccessData {
             get { return _successData; }
             set { _successData = value; OnPropertyChanged(nameof(SuccessData)); }
         }
@@ -45,7 +45,7 @@ namespace Presentation.ViewModels
                 (from i in fullRecipe.Steps
                  select new RecipeStepViewModel(i)).ToList());
 
-            _successData = fullRecipe.SuccessData;
+            _successData = new SuccessDataViewModel(fullRecipe.SuccessData!);
 
         }
 
