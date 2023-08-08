@@ -12,6 +12,7 @@ namespace Presentation.ViewModels
     public class FullRecipeViewModel: ViewModelBase
     {
         private readonly FullRecipe _fullRecipe;
+
         public int ID => _fullRecipe.ID;
         public string? Title => _fullRecipe.Title;
         public string? Image => _fullRecipe.Image;
