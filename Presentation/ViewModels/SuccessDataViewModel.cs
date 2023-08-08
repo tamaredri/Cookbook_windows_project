@@ -21,7 +21,8 @@ namespace Presentation.ViewModels
         private string? comment;
         public string? Comment {
             get { return comment; }
-            set { comment = value; OnPropertyChanged(nameof(Comment)); }
+            set { 
+                comment = value; OnPropertyChanged(nameof(Comment)); }
         }
 
         private ObservableCollection<string>? _images;

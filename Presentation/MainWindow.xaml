@@ -24,8 +24,8 @@
     <Grid Background="#EEEEEE">
 
         <!--<views:RecipeResultsListView Loaded="SearchIngredient_Loaded" Height="450" Width="790"/>-->
-        <views:SingleRecipeView />
-        <!--<views:selectedIngredientsList></views:selectedIngredientsList>-->
+        <!--<views:SingleRecipeView />-->
+        <views:selectedIngredientsList/>
         <!--<views:UserRecipeInformation></views:UserRecipeInformation>-->
         <!--<views:FreeSearch></views:FreeSearch>-->
         <!--<views:Entry></views:Entry>-->

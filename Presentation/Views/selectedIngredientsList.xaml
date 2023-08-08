@@ -7,6 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -30,11 +31,12 @@
             Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
                 BorderBrush="Transparent" Width="40" Height="40"
                 VerticalAlignment="Bottom"
-                Margin="10,0,0,10" Background="Gray">
+                Margin="10,0,0,10" Background="#537188">
                 <materialDesign:PackIcon Kind="Plus" 
                                          Foreground="Black"
                                          Height="30" Width="30"/>
             </Button>
+            
         </StackPanel>
 
         <Border x:Name="slectedIngredients"  Grid.Row="1"
@@ -51,41 +53,15 @@
                                 <DataTemplate>
 
                                     <materialDesign:Chip x:Name="selectedIngredient"
-                                                        Margin="7,7,0,0"
-                                                        Width="150" Height="40"
-                                                        Content="{Binding Name}"
-                                                        FontFamily="Calibri"
-                                                        FontSize="15"
-                                                        IsDeletable="True"
-                                                        DeleteClick="ButtonsDemoChip_OnDeleteClick"
-                                                        ToolTip="Just a tool tip"
-                                                        DeleteToolTip="Your friendly neighbor delete button">
-                                    </materialDesign:Chip>
-
-                                    <!--<Grid Margin="5" Width="170" Height="115">
-
-                                        <Border BorderBrush="Black" 
-                                                BorderThickness="0.7" 
-                                                Background="#EEEEEE">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="8" Opacity="0.2" 
-                                                                  BlurRadius="10" 
-                                                                  Color="Gray" />
-                                            </Border.Effect>
-                                        </Border>
-
-                                        <StackPanel>
-                                            <Image Source="carrot-leaves.jpg">
-
-                                            </Image>
-
-                                            <TextBlock x:Name="recipeTitle" 
-                                                       HorizontalAlignment="Center" 
-                                                       Text="{Binding Name}" FontSize="13"/>
-
-                                        </StackPanel>
-
-                                    </Grid>-->
+                                                         Margin="7,7,0,0"
+                                                         Width="150" Height="40"
+                                                         Content="{Binding Name}"
+                                                         FontFamily="Calibri"
+                                                         FontSize="15"
+                                                         IsDeletable="True"
+                                                         DeleteClick="ButtonsDemoChip_OnDeleteClick"
+                                                         ToolTip="Just a tool tip"
+                                                         DeleteToolTip="Your friendly neighbor delete button"/>
 
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -105,8 +81,12 @@
                 Style="{StaticResource MaterialDesignPaperDarkButton}"
                 Width="100" Height="40"
                 ToolTip="Resource name: MaterialDesignPaperDarkButton"
-                Content="SEARCH" 
-                Background="Transparent"/>
+                BorderBrush="#537188"
+                BorderThickness="1"
+                Background="Transparent">
+            <TextBlock Text="SEARCH" 
+                           Foreground="#537188"/>
+        </Button>
 
     </Grid>
 </UserControl>
