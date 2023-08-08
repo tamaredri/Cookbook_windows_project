@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.ViewModels
 {
-    internal class EntryViewModel
+    internal class EntryViewModel : ViewModelBase
     {
 
     }
