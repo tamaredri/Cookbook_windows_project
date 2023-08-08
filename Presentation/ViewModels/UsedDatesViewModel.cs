@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.ViewModels
 {
-    internal class UsedDatesViewModel
+    internal class UsedDatesViewModel: ViewModelBase
     {
         private readonly UsedDate? _usedDate;
 
