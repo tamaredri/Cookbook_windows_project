@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.ViewModels
 {
-    internal class IngredientInRecipeViewModel : ViewModelBase
+    public class IngredientInRecipeViewModel : ViewModelBase
     {
         private readonly IngredientInRecipe? ingredientInRecie;
 

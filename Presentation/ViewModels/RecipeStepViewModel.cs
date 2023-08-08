@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.ViewModels
 {
-    internal class RecipeStepViewModel :ViewModelBase
+    public class RecipeStepViewModel :ViewModelBase
     {
         private readonly RecipeStep? _recipeStep;
 

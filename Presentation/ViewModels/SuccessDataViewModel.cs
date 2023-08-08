@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Presentation.ViewModels
 {
-    internal class SuccessDataViewModel : ViewModelBase
+    public class SuccessDataViewModel : ViewModelBase
     {
         private readonly SuccessData _successData;
 
