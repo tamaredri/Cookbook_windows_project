@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Models
 {
-    public class IngridientToSearch
+    public class IngredientToSearch
     {
         public string? Name { get; }
 

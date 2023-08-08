@@ -8,11 +8,11 @@ namespace Presentation.Models
 {
     public class FullRecipe
     {
-        public int ID { get; }
+        public int ID { get; set; }
 
-        public string? Title { get; }
+        public string? Title { get; set; }
 
-        public string? Image { get; }
+        public string? Image { get; set; }
 
         public int ReadyInMinutes { get; set; }
 
@@ -20,7 +20,7 @@ namespace Presentation.Models
 
         public string? Summary { get; set; }
 
-        public IEnumerable<IngridientInRecipe>? Ingridients { get; set; }
+        public IEnumerable<IngredientInRecipe>? Ingridients { get; set; }
 
         public IEnumerable<RecipeStep>? Steps { get; set; }
 

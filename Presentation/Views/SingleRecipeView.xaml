@@ -6,13 +6,14 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Presentation.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600" Background="#EEEEEE">
-
+             d:DesignHeight="450" d:DesignWidth="600" 
+             Background="#EEEEEE" DataContext="{Binding FullRecipeViewModel}">
+             
     <!--<UserControl.Resources>
         <FontFamily x:Key="CustomFontFamily">./Fonts/#Bebas Neue</FontFamily>
     </UserControl.Resources>-->
 
-    <Grid Background="Transparent">
+    <Grid Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.8*"/>
@@ -45,7 +46,7 @@
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="4" Opacity="0.2" Color="Gray"/>
                         </Border.Effect>
-                        <TextBlock Text="30" FontFamily="Courier New"
+                        <TextBlock Text="{Binding ReadyInMinutes}" FontFamily="Courier New"
                            FontWeight="Bold"
                            FontSize="20"/>
                     </Border>
@@ -75,7 +76,7 @@
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="4" Opacity="0.2" Color="Gray"/>
                         </Border.Effect>
-                        <TextBlock Text="12" FontFamily="Courier New"
+                        <TextBlock Text="{Binding Servings}" FontFamily="Courier New"
                            FontWeight="Bold"
                            FontSize="20"/>
                     </Border>
@@ -93,7 +94,7 @@
             </StackPanel>
 
             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                       Text="Banana Cream Cake" VerticalAlignment="Center" 
+                       Text="{Binding Title}" VerticalAlignment="Center" 
                        FontFamily="Candara"
                        FontWeight="ExtraBold"
                        FontSize="40"
@@ -111,7 +112,7 @@
                     <Image MaxWidth="200" 
                            MaxHeight="120" 
                            Margin="15 0 0 0"
-                           Source="https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg"/>
+                           Source="{Binding Image}"/>
 
                     <TextBlock TextWrapping="Wrap" 
                                VerticalAlignment="Center"
@@ -120,7 +121,7 @@
                                Padding="20 10 20 10"
                                MaxWidth="500"
                                Margin="5 0 0 0"
-                               Text="This banana bread recipe creates the most delicious, moist loaf with loads of banana flavor. Why compromise the banana flavor? Friends and family love my recipe and say it's by far the best! It tastes wonderful toasted. Enjoy!" Width="405"/>
+                               Text="{Binding Summary}" Width="405"/>
                 </StackPanel>
 
                 <Rectangle Width="400" Height="1" 
@@ -149,7 +150,7 @@
                 
                 <StackPanel Name="Ingredients" Orientation="Vertical"
                             Margin="0 0 0 5">
-                    <ItemsControl x:Name="IngridientsItems" ItemsSource="{Binding RecipeStep}">
+                    <ItemsControl x:Name="IngridientsItems" ItemsSource="{Binding Ingridients}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10">
@@ -158,7 +159,7 @@
                                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" 
                                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
                                                    FontFamily="Calibri"
-                                                   Text="{Binding Name}" 
+                                                   Text="{Binding IngredientDescription}" 
                                                    MaxWidth="500"
                                                    FontSize="15"/>
                                     </StackPanel>
@@ -194,7 +195,7 @@
                 <StackPanel Name="Steps" 
                             Orientation="Vertical"
                             Margin="0 0 0 5">
-                    <ItemsControl x:Name="StepsItems" ItemsSource="{Binding RecipeStep}">
+                    <ItemsControl x:Name="StepsItems" ItemsSource="{Binding Steps}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Margin="10">
