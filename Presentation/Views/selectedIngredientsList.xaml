@@ -30,7 +30,8 @@
                     Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
                     BorderBrush="Transparent" Width="40" Height="40"
                     VerticalAlignment="Bottom"
-                    Margin="10,0,0,10" Background="#537188">
+                    Margin="10,0,0,10" Background="#537188" 
+                    Click="AddIngredientClick">
                   <materialDesign:PackIcon Kind="Plus" 
                                            Foreground="Black"
                                            Height="30" Width="30"/>
@@ -58,7 +59,7 @@
                                                          FontFamily="Calibri"
                                                          FontSize="15"
                                                          IsDeletable="True"
-                                                         
+                                                         DeleteClick="RemoveIngredientClick"
                                                          ToolTip="Just a tool tip"
                                                          DeleteToolTip="Your friendly neighbor delete button"/>
                                     <!--DeleteClick="ButtonsDemoChip_OnDeleteClick"-->
@@ -82,6 +83,7 @@
                 ToolTip="Resource name: MaterialDesignPaperDarkButton"
                 BorderBrush="#537188"
                 BorderThickness="1"
+                Command="{Binding SearchCommand}"
                 Background="Transparent">
             <TextBlock Text="SEARCH" 
                            Foreground="#537188"/>

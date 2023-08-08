@@ -16,18 +16,7 @@
                 HorizontalAlignment="Left"
                 BorderBrush="#537188" 
                 Margin="15"
-                BorderThickness="1">
-            <TextBlock Text="FREE SEARCH" 
-                       FontSize="20"
-                       Foreground="#537188"/>
-        </Button>
-
-        <Button x:Name="myRecipes" 
-                Width="250" Height="70"
-                Background="#EEEEEE"
-                HorizontalAlignment="Left"
-                BorderBrush="#537188" 
-                Margin="15"
+                Command="{Binding FreeSearchCommand}"
                 BorderThickness="1">
             <TextBlock Text="FREE SEARCH" 
                        FontSize="20"
@@ -40,11 +29,27 @@
                 HorizontalAlignment="Left"
                 BorderBrush="#537188" 
                 Margin="15"
+                Command="{Binding IngredientSearchCommand}"
                 BorderThickness="0.7">
             <TextBlock Text="INGREDIENTS SEARCH"
                        FontSize="20"
                            Foreground="#537188"/>
         </Button>
+
+        <Button x:Name="myRecipes" 
+                Width="250" Height="70"
+                Background="#EEEEEE"
+                HorizontalAlignment="Left"
+                BorderBrush="#537188" 
+                Margin="15"
+                Command="{Binding MyRecipesCommand}"
+                BorderThickness="1">
+            <TextBlock Text="MY RECIPES" 
+                       FontSize="20"
+                       Foreground="#537188"/>
+        </Button>
+
+
 
 
     </StackPanel>
