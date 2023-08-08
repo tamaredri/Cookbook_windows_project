@@ -224,6 +224,16 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
+
+                <Expander Header="Personalized Data - Your Recipe"
+                          Margin="50 10 50 10">
+                    <Grid>
+                        <local:UserRecipeInformation DataContext="{Binding SuccessData}"
+                                                     HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Stretch"
+                                                     MinHeight="300" MinWidth="200"/>
+                    </Grid>
+                </Expander>
             </StackPanel>
         </ScrollViewer>
     </Grid>

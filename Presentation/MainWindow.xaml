@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="650">
 
     <!--<Window.Resources>
         --><!-- Define the FontFamily for the MainWindow as DynamicResource --><!--
@@ -24,7 +24,7 @@
     <Grid Background="#EEEEEE">
 
         <!--<views:RecipeResultsListView Loaded="SearchIngredient_Loaded" Height="450" Width="790"/>-->
-        <views:SingleRecipeView ></views:SingleRecipeView >
+        <views:SingleRecipeView />
         <!--<views:selectedIngredientsList></views:selectedIngredientsList>-->
         <!--<views:UserRecipeInformation></views:UserRecipeInformation>-->
         <!--<views:FreeSearch></views:FreeSearch>-->

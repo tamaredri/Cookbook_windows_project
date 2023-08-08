@@ -42,8 +42,19 @@ namespace Presentation.Views
                     Steps = new List<RecipeStep> { new RecipeStep() { Number = 1, Step = "Preheat the oven to 350 degrees F (175 degrees C). Lightly grease a 9x5-inch loaf pan." },
                         new RecipeStep() { Number = 2, Step = "Combine flour, baking soda, and salt in a large bowl. Beat brown sugar and butter with an electric mixer in a separate large bowl until smooth. Stir in eggs and mashed bananas until well blended. Stir banana mixture into flour mixture until just combined. Pour batter into the prepared loaf pan." },
                         new RecipeStep() { Number = 3, Step = "Bake in the preheated oven until a toothpick inserted into the center comes out clean, about 60 minutes. Let bread cool in pan for 10 minutes, then turn out onto a wire rack to cool completely." } },
-                    SuccessData = null
+                    SuccessData = new SuccessData()
+                    {
+                        Images = new List<string> { "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                                                    "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                                                    "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                                                    "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                                                    "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg" },
+                        Comment = "it is working reut",
+                        Rating = 4,
+                        usedDates = new List<UsedDate> ()
+                    }
                 });
+        
         }
     }
 }
