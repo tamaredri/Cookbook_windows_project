@@ -16,8 +16,6 @@ namespace Presentation.ViewModels
         private ObservableCollection<string?>? _ingredientList;
         public IEnumerable<string?>? IngredientList => _ingredientList;
 
-        public ICommand? AddIngredientCommand { get;}
-        public ICommand? RemoveIngredientCommand { get;}
         public ICommand? SearchCommand { get;}
 
 
@@ -25,8 +23,6 @@ namespace Presentation.ViewModels
         {
             _ingredientList = new ObservableCollection<string?>();
 
-            AddIngredientCommand = new CreateIngredientToListCommand();
-            RemoveIngredientCommand = new DeleteIngredientFromListCommand();
             SearchCommand = new GetByIngredientSearchCommand();
         }
 

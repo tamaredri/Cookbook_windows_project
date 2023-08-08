@@ -62,7 +62,6 @@
                                                          DeleteClick="RemoveIngredientClick"
                                                          ToolTip="Just a tool tip"
                                                          DeleteToolTip="Your friendly neighbor delete button"/>
-                                    <!--DeleteClick="ButtonsDemoChip_OnDeleteClick"-->
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>
