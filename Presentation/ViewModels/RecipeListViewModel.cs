@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Presentation.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,9 +16,11 @@ namespace Presentation.ViewModels
 
         public ICommand? SelectRecipeCommand { get; set; }
 
-        public RecipeListViewModel(ObservableCollection<RecipeForListViewModel> RecipesToList) 
+        public RecipeListViewModel(IEnumerable<RecipeToList> RecipesToList) 
         {
-            _Recipes = RecipesToList;
+            _Recipes = new ObservableCollection<RecipeForListViewModel>((from r in RecipesToList 
+                                                                         select new RecipeForListViewModel(r))
+                                                                         .ToList());
         }
     }
 }
