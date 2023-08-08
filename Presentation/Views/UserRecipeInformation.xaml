@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-             DataContext="{Binding SuccessData}">
+             DataContext="{Binding SuccessDataViewModel}">
     <Border CornerRadius="5" BorderThickness="10" Background="White">
         <Border.Effect>
             <DropShadowEffect ShadowDepth="10" />
@@ -18,6 +18,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Grid Name="ImagesGrid" Grid.Row="0">
@@ -26,26 +27,25 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 
-                <DockPanel Name="HeadLineAndAddButtonDockPanel" Grid.Row="0">
+                <StackPanel Name="HeadLineAndAddButtonDockPanel" 
+                            Grid.Row="0"
+                            Orientation="Horizontal">
                     <Button x:Name="AddImages"
-                        Style="{StaticResource MaterialDesignFloatingActionLightButton}"
-                        DockPanel.Dock="Right"
-                        Margin="10 0 20 0"
-                        VerticalAlignment="Center"
-                        Background="#537188"
-                        BorderBrush="#537188">
-                        <materialDesign:PackIcon Kind="ImagePlus" />
+                            Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                            Margin="10 0 5 0"
+                            Height="40" Width="40"
+                            VerticalAlignment="Center"
+                            Background="#537188"
+                            BorderBrush="#537188">
+                         <materialDesign:PackIcon Kind="ImagePlus" />   
                     </Button>
-
+                    
                     <TextBlock x:Name="yourImagesTitle"
                                Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
-                               DockPanel.Dock="Left"
-                               Text="YOUR IMAGES:" 
+                               Text="YOUR PAST RECIPES:" 
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
                                Margin="10"/>
-
-                </DockPanel>
+                </StackPanel>
 
             <Border x:Name="imagesBorder"  
                     Grid.Row="1"
@@ -53,21 +53,21 @@
                     BorderBrush="#537188"
                     BorderThickness="1"
                     Margin="10"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Stretch">
 
                     <ScrollViewer x:Name="ImagesList" HorizontalScrollBarVisibility="Auto">
                         <StackPanel>
                             <ItemsControl x:Name="ListOfImages" ItemsSource="{Binding Images}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border HorizontalAlignment="Center" Margin="5">
-                                            <Image Source ="{Binding}" Height="50"/>
+                                        <Border HorizontalAlignment="Center" Margin="10 15 5 15">
+                                            <Image Source ="{Binding}" Height="75"/>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel MaxWidth="100" Orientation="Horizontal"/>
+                                        <WrapPanel/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
@@ -75,8 +75,61 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Border x:Name="DatesBorder"  
+                    Grid.Row="0"
+                    CornerRadius="3"
+                    BorderBrush="#537188"
+                    BorderThickness="1"
+                    Margin="10"
+                    VerticalAlignment="Stretch">
+
+                    <ScrollViewer x:Name="DatesList">
+                        <StackPanel>
+                            <ItemsControl x:Name="ListOfDates" ItemsSource="{Binding UsedDates}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border HorizontalAlignment="Center" Margin="10 15 5 15">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="CalendarRange" 
+                                                                         Margin="5"
+                                                                         VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Date}"  
+                                                           VerticalAlignment="Center"
+                                                           Margin=" 5"/>
+                                                <TextBlock Text="{Binding Description}"  
+                                                           VerticalAlignment="Center"
+                                                           Margin="5"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <Button Grid.Row="1"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="10"
+                        ToolTip="If you used this recipe today, please save it to your history by pressing this button."
+                        Content="Save today to the list"
+                        Background="#537188"/>
+
+
+            </Grid>
             
-            <Grid Name="CommentAndRatingGrid" Grid.Row="1">
+            <Grid Name="CommentAndRatingGrid" Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -97,17 +150,19 @@
                     <Button x:Name="editComment"
                         Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                         DockPanel.Dock="Right"
-                        Margin="10 0 20 0"
+                        Margin="10 0 20 10"
                         VerticalAlignment="Center"
                         Background="#537188"
                         BorderBrush="#537188">
                         <materialDesign:PackIcon Kind="ContentSave" />
                     </Button>
-
+                    
                     <materialDesign:RatingBar x:Name="BasicRatingBar"
+                                          Grid.Column="1"
+                                          VerticalAlignment="Top"
                                           Padding="10"
-                                          VerticalAlignment="Center"
                                           Value="{Binding Rating}"/>
+
                 </DockPanel>
 
             </Grid>

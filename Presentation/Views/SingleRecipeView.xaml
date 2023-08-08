@@ -103,7 +103,7 @@
         </DockPanel>
 
 
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible">
+        <ScrollViewer Grid.Row="1">
             <StackPanel Orientation="Vertical">
 
                 <StackPanel  Name="imageAndSummary" 
@@ -226,12 +226,10 @@
                 </StackPanel>
 
                 <Expander Header="Personalized Data - Your Recipe"
-                          Margin="50 10 50 10">
+                          Margin="50 10 50 10"
+                          VerticalAlignment="Stretch">
                     <Grid>
-                        <local:UserRecipeInformation DataContext="{Binding SuccessData}"
-                                                     HorizontalAlignment="Stretch"
-                                                     VerticalAlignment="Stretch"
-                                                     MinHeight="300" MinWidth="200"/>
+                        <local:UserRecipeInformation DataContext="{Binding SuccessData}"/>
                     </Grid>
                 </Expander>
             </StackPanel>

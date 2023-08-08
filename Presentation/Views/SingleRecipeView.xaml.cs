@@ -51,9 +51,13 @@ namespace Presentation.Views
                                                     "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg" },
                         Comment = "it is working reut",
                         Rating = 4,
-                        usedDates = new List<UsedDate> ()
+                        usedDates = new List<UsedDate>() { new UsedDate() { Date = new DateTime(2023, 8, 7), Description = "hunnuka" },
+                                                           new UsedDate() { Date = new DateTime(2023, 8, 5), Description = "passover" },
+                                                           new UsedDate() { Date = new DateTime(2023, 8, 3), Description = "shabatt" },
+                                                           new UsedDate() { Date = new DateTime(2023, 8, 1), Description = "purim" },
+                        }
                     }
-                });
+                }); ;
         
         }
     }
