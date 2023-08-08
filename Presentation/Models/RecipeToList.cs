@@ -8,10 +8,10 @@ namespace Presentation.Models
 {
     public class RecipeToList
     {
-        public int ID { get; }
+        public int ID { get; set; }
 
-        public string? Title { get; }
+        public string? Title { get; set; }
 
-        public string? Image { get; }
+        public string? Image { get; set; }
     }
 }

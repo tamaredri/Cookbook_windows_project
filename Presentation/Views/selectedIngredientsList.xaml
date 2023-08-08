@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Presentation.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d">
+             mc:Ignorable="d" DataContext="{Binding SelectIngredientViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -22,17 +22,18 @@
                      HorizontalAlignment="Left"
                      VerticalAlignment="Bottom"
                      Width="300"
-                     Margin="10,5,5,10">
-            </TextBox>
+                     Margin="10,5,5,10"
+                     Text="{Binding Path=SearchIngredient, Mode=TwoWay}"/>
+            
 
             <Button Name="addIngredient" Grid.Row="1"
-            Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
-                BorderBrush="Transparent" Width="40" Height="40"
-                VerticalAlignment="Bottom"
-                Margin="10,0,0,10" Background="#537188">
-                <materialDesign:PackIcon Kind="Plus" 
-                                         Foreground="Black"
-                                         Height="30" Width="30"/>
+                    Style="{StaticResource MaterialDesignFloatingActionSecondaryDarkButton}" 
+                    BorderBrush="Transparent" Width="40" Height="40"
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,10" Background="#537188">
+                  <materialDesign:PackIcon Kind="Plus" 
+                                           Foreground="Black"
+                                           Height="30" Width="30"/>
             </Button>
             
         </StackPanel>
@@ -46,21 +47,21 @@
             <ScrollViewer VerticalAlignment="Top">
                 <StackPanel>
                     <StackPanel Margin="20 0">
-                        <ItemsControl x:Name="ListViewIngredients" Margin="0,10,0,0" ItemsSource="{Binding Ingredient}">
+                        <ItemsControl x:Name="ListViewIngredients" Margin="0,10,0,0" ItemsSource="{Binding IngredientList}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
 
                                     <materialDesign:Chip x:Name="selectedIngredient"
                                                          Margin="7,7,0,0"
                                                          Width="150" Height="40"
-                                                         Content="{Binding Name}"
+                                                         Content="{Binding}"
                                                          FontFamily="Calibri"
                                                          FontSize="15"
                                                          IsDeletable="True"
-                                                         DeleteClick="ButtonsDemoChip_OnDeleteClick"
+                                                         
                                                          ToolTip="Just a tool tip"
                                                          DeleteToolTip="Your friendly neighbor delete button"/>
-
+                                    <!--DeleteClick="ButtonsDemoChip_OnDeleteClick"-->
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>

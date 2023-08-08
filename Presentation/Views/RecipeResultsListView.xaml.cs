@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Presentation.Models;
+using Presentation.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,36 +37,18 @@ namespace Presentation.Views
     /// </summary>
     public partial class RecipeResultsListView : UserControl
     {
-       
-
         public RecipeResultsListView()
         {
             InitializeComponent();
-            var products = GetProducts();
-            if (products.Count > 0)
-                ListViewRecipe.ItemsSource = products;
-        }
-
-        private List<Recipe> GetProducts()
-        {
-            return new List<Recipe>()
-                {
-                new Recipe("lettuce salad 1", 205.46, "/Assets/1.jpg"),
-                new Recipe("lettuce salad 2", 102.50, "/Assets/2.jpg"),
-                new Recipe("lettuce salad 3", 400.99, "/Assets/3.jpg"),
-                new Recipe("lettuce salad 4", 350.26, "/Assets/4.jpg"),
-                new Recipe("lettuce salad 5", 150.10, "/Assets/5.jpg"),
-                new Recipe("lettuce salad 6", 100.02, "/Assets/6.jpg"),
-                new Recipe("lettuce salad 7", 295.25, "/Assets/7.jpg"),
-                new Recipe("lettuce salad 8", 295.25, "/Assets/7.jpg"),
-                new Recipe("lettuce salad 9", 295.25, "/Assets/7.jpg"),
-                new Recipe("lettuce salad 10", 295.25, "/Assets/7.jpg"),
-                };
-        }
-
-        private void openRecipe(object sender, MouseButtonEventArgs e)
-        {
-            new SingleRecipeWindow();
+            DataContext = new RecipeListViewModel(new ObservableCollection<RecipeForListViewModel>() {
+                        new RecipeForListViewModel(new RecipeToList(){ID = 1, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 1"}),
+                        new RecipeForListViewModel(new RecipeToList(){ID = 2, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 2"}),
+                        new RecipeForListViewModel(new RecipeToList(){ID = 3, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 3"}),
+                        new RecipeForListViewModel(new RecipeToList(){ID = 4, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 4"}),
+                        new RecipeForListViewModel(new RecipeToList(){ID = 5, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 5"}),
+                        new RecipeForListViewModel(new RecipeToList(){ID = 6, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 6"}),
+                        new RecipeForListViewModel(new RecipeToList(){ID = 7, Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg", Title = "lettuce salad 7"})
+            });
         }
     }
 }

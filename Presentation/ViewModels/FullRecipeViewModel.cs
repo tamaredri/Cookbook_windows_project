@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Presentation.ViewModels
 {
@@ -32,6 +33,9 @@ namespace Presentation.ViewModels
             get { return _successData; }
             set { _successData = value; OnPropertyChanged(nameof(SuccessData)); }
         }
+
+        public ICommand? FindSimilarRecipesCommand { get; set; }
+
 
         public FullRecipeViewModel(FullRecipe fullRecipe)
         {

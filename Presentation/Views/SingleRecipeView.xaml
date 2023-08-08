@@ -8,24 +8,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600" 
              Background="#EEEEEE" DataContext="{Binding FullRecipeViewModel}">
-             
-    <!--<UserControl.Resources>
-        <FontFamily x:Key="CustomFontFamily">./Fonts/#Bebas Neue</FontFamily>
-    </UserControl.Resources>-->
 
-    <Grid Background="Transparent" >
+    <Grid Background="Transparent" Name="parentGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Name="titleAndInfo">
+        <DockPanel Name="titleAndInfo" Grid.Row="0">
             <StackPanel DockPanel.Dock="Right" 
                         Orientation="Horizontal"
                         Margin="0 0 5 0">
-                <!--<Image Width="30" 
-                       Height="30" 
-                       Margin="5" 
-                       Source="..\Images\kitchen-timer.png"/>-->
 
                 <StackPanel x:Name="timeStack" 
                             Orientation="Horizontal"
@@ -54,7 +46,7 @@
                     
 
 
-                    <StackPanel x:Name="amountDiningStack" 
+                <StackPanel x:Name="amountDiningStack" 
                             Orientation="Horizontal"
                             Margin="10,0,10,0">
                     <Border Width="30">
@@ -63,7 +55,6 @@
                                                  VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"
                                                  Width="30" Height="30"/>
-                        <!--<Image Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\dining-number.png"/>-->
                         
                     </Border>
                     <Border x:Name="amountDiners"
@@ -82,28 +73,18 @@
                     </Border>
                 </StackPanel>
 
-
-                
-
-                <!--<Image Width="45" 
-                       Height="45" 
-                       Margin="10 5 5 5" 
-                       Source="..\Images\dining-number.png"/>-->
-
-                
             </StackPanel>
 
             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                        Text="{Binding Title}" VerticalAlignment="Center" 
                        FontFamily="Candara"
                        FontWeight="ExtraBold"
-                       FontSize="40"
+                       FontSize="30"
                        Margin="10,0,0,0"
                        HorizontalAlignment="Left"/>
         </DockPanel>
 
-
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Name="RecipeDetails" Grid.Row="1">
             <StackPanel Orientation="Vertical">
 
                 <StackPanel  Name="imageAndSummary" 
@@ -124,10 +105,10 @@
                                Text="{Binding Summary}" Width="405"/>
                 </StackPanel>
 
-                <Rectangle Width="400" Height="1" 
-                           Fill="Black"
+                <Rectangle Height="1" Width="{Binding ActualWidth, ElementName=RecipeDetails}"
+                           Fill="#537188"
                            HorizontalAlignment="Left"
-                           Margin="15 0 0 0"/>
+                           Margin="15 0 15 0"/>
                 
                 <StackPanel Name="IngredientsTitle" 
                             Orientation="Horizontal"
@@ -135,9 +116,6 @@
                     <materialDesign:PackIcon Kind="FoodVariant"
                                              Width="40" 
                                              Height="40"/>
-                    <!--<Image MaxWidth="40" 
-                               MaxHeight="40" 
-                               Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\ingredients.png" RenderTransformOrigin="0.45,0.478"/>-->
                     
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    Text="Ingredients:" 
@@ -169,9 +147,8 @@
                     </ItemsControl>
                 </StackPanel>
 
-
-                <Rectangle Width="400" Height="1" 
-                           Fill="Black"
+                <Rectangle Width="{Binding ActualWidth, ElementName=RecipeDetails}" Height="1" 
+                           Fill="#537188"
                            HorizontalAlignment="Left"
                            Margin="15,0,0,0"/>
 
@@ -179,11 +156,7 @@
                     <materialDesign:PackIcon Kind="ClipboardText" Width="40" 
                                Height="40" 
                                Margin="10"/>
-                    <!--<Image MaxWidth="40" 
-                               MaxHeight="40" 
-                               Margin="10"
-                               Source="C:\Networks\Cookbook_windows_project\Presentation\Views\Images\process.png"/>-->
-                    
+
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
                                    Text="Steps:" 
                                    VerticalAlignment="Center"
@@ -225,12 +198,17 @@
                     </ItemsControl>
                 </StackPanel>
 
+                <Button Name="SimilarRecipes" Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="10"
+                        Content="Find Similar Recipes"
+                        Background="#537188"/>
+
                 <Expander Header="Personalized Data - Your Recipe"
                           Margin="50 10 50 10"
                           VerticalAlignment="Stretch">
-                    <Grid>
                         <local:UserRecipeInformation DataContext="{Binding SuccessData}"/>
-                    </Grid>
                 </Expander>
             </StackPanel>
         </ScrollViewer>
