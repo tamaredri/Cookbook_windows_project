@@ -11,7 +11,7 @@ namespace Presentation.ViewModels
     {
         public string? SearchQuery { get; set; }
 
-        public ICommand? ApplySearchCommad { get; set; }
+        public ICommand? ApplySearchCommand { get; set; }
 
     }
 }

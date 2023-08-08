@@ -33,11 +33,11 @@ namespace Presentation.ViewModels
         private ObservableCollection<UsedDatesViewModel>? _usedDates;
         public IEnumerable<UsedDatesViewModel>? UsedDates => _usedDates;
 
-        public ICommand? AddImageCommad { get; set; }
+        public ICommand? AddImageCommand { get; set; }
 
-        public ICommand? AddTodayDateCommad { get; set; }
+        public ICommand? AddTodayDateCommand { get; set; }
 
-        public ICommand? SaveChangesCommad { get; set; }
+        public ICommand? SaveChangesCommand { get; set; }
 
         public SuccessDataViewModel(SuccessData successData)
         {

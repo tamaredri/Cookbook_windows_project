@@ -26,7 +26,7 @@
         <!--<views:RecipeResultsListView/>-->
         <views:SingleRecipeView />
         <!--<views:selectedIngredientsList/>-->
-        <!--<views:UserRecipeInformation></views:UserRecipeInformation>-->
+        <!--<views:UserRecipeInformation/>-->
         <!--<views:FreeSearch></views:FreeSearch>-->
         <!--<views:Entry></views:Entry>-->
     </Grid>

@@ -9,8 +9,9 @@ namespace Presentation.ViewModels
 {
     internal class EntryViewModel : ViewModelBase
     {
-        public ICommand? FreeSearchCommad { get; set; }
+        public ICommand? FreeSearchCommand { get; set; }
 
-        public ICommand? IngredientSearchCommad { get; set; }
+        public ICommand? IngredientSearchCommand { get; set; }
+        public ICommand? MyRecipesCommand { get; set; }
     }
 }

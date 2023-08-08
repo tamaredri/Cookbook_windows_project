@@ -29,7 +29,7 @@
             <Button x:Name="SearchButton" 
                     Grid.Column="1"
                     Width="100"
-                    Background="#537188"
+                    Background="Transparent"
                     HorizontalAlignment="Left"
                     BorderBrush="#537188" 
                     Margin="15 0 0 0"

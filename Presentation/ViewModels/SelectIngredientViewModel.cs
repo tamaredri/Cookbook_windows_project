@@ -15,11 +15,10 @@ namespace Presentation.ViewModels
         private ObservableCollection<string?>? _ingredientList;
         public IEnumerable<string?>? IngredientList => _ingredientList;
 
-        public ICommand? AddIngredientCommad { get; set; }
-
+        public ICommand? AddIngredientCommand { get; set; }
+        public ICommand? RemoveIngredientCommand { get; set; }
         public ICommand? SearchCommand { get; set; }
 
-        public ICommand? RemoveIngredientCommand { get; set; }
 
         public SelectIngredientViewModel()
         {
