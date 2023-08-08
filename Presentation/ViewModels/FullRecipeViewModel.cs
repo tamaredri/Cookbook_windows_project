@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.ViewModels
 {
-    internal class FullRecipeViewModel: ViewModelBase
+    public class FullRecipeViewModel: ViewModelBase
     {
         private readonly FullRecipe _fullRecipe;
         public int ID => _fullRecipe.ID;

@@ -10,6 +10,7 @@ namespace Presentation.ViewModels
     internal class RecipeStepViewModel :ViewModelBase
     {
         private readonly RecipeStep? _recipeStep;
+
         public int Number => _recipeStep!.Number;
 
         public string? Step => _recipeStep!.Step;

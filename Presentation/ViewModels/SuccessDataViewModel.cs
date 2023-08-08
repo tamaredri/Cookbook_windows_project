@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Presentation.ViewModels
 {
@@ -30,7 +31,12 @@ namespace Presentation.ViewModels
 
         private ObservableCollection<UsedDatesViewModel>? _usedDates;
         public IEnumerable<UsedDatesViewModel>? UsedDates => _usedDates;
-        
+
+        public ICommand? AddImageCommad { get; set; }
+
+        public ICommand? AddTodayDateCommad { get; set; }
+
+        public ICommand? SaveChangesCommad { get; set; }
 
         public SuccessDataViewModel(SuccessData successData)
         {

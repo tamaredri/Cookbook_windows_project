@@ -7,10 +7,11 @@ using System.Windows.Input;
 
 namespace Presentation.ViewModels
 {
-    internal class EntryViewModel : ViewModelBase
+    public class FreeSearchViewModel : ViewModelBase
     {
-        public ICommand? FreeSearchCommad { get; set; }
+        public string? SearchQuery { get; set; }
 
-        public ICommand? IngredientSearchCommad { get; set; }
+        public ICommand? ApplySearchCommad { get; set; }
+
     }
 }
