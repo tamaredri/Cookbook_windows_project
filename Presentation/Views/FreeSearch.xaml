@@ -31,11 +31,11 @@
                     Width="100"
                     Background="#537188"
                     HorizontalAlignment="Left"
-                    BorderBrush="Black" 
+                    BorderBrush="#537188" 
                     Margin="15 0 0 0"
-                    BorderThickness="0.7">
+                    BorderThickness="1">
                 <TextBlock Text="SEARCH" 
-                           Foreground="Black"/>
+                           Foreground="#537188"/>
             </Button>
 
         </StackPanel>

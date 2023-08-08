@@ -15,24 +15,24 @@
                 Width="250" Height="70"
                 Background="#EEEEEE"
                 HorizontalAlignment="Left"
-                BorderBrush="Black" 
+                BorderBrush="#537188" 
                 Margin="0 0 15 0"
-                BorderThickness="0.7">
+                BorderThickness="1">
             <TextBlock Text="FREE SEARCH" 
                        FontSize="20"
-                       Foreground="Black"/>
+                       Foreground="#537188"/>
         </Button>
 
         <Button x:Name="ingredients"
                 Width="250" Height="70"
                 Background="#EEEEEE"
                 HorizontalAlignment="Left"
-                BorderBrush="Black" 
+                BorderBrush="#537188" 
                 Margin="15 0 0 0"
                 BorderThickness="0.7">
             <TextBlock Text="INGREDIENTS SEARCH"
                        FontSize="20"
-                           Foreground="Black"/>
+                           Foreground="#537188"/>
         </Button>
 
 
