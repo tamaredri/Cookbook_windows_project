@@ -33,8 +33,10 @@ namespace Presentation.ViewModels
         
 
         public SuccessDataViewModel(SuccessData successData)
+        public SuccessDataViewModel(SuccessData successData)
         {
             _successData = successData;
+
             rating = successData.Rating;
             comment = successData.Comment;
 

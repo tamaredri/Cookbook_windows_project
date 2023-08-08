@@ -8,5 +8,6 @@ namespace Presentation.ViewModels
 {
     internal class EntryViewModel
     {
+
     }
 }
