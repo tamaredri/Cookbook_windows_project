@@ -11,7 +11,7 @@ namespace Presentation.ViewModels
     {
         private readonly UsedDate? _usedDate;
 
-        public DateTime Date => _usedDate!.Date;
+        public string? Date => $"{_usedDate!.Date.Day}/{_usedDate!.Date.Month}/{_usedDate!.Date.Year}";
         public string? Description => _usedDate!.Description;
 
         public UsedDatesViewModel(UsedDate usedDate)
