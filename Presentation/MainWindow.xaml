@@ -25,11 +25,20 @@
     
     <Grid Background="#EEEEEE">
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type vms:RecipeListViewModel}">
-                <views:RecipeResultsListView/>
+            <DataTemplate DataType="{x:Type vms:EntryViewModel}">
+                <views:Entry/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vms:FreeSearchViewModel}">
                 <views:FreeSearch/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:SelectIngredientViewModel}">
+                <views:selectedIngredientsList/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:RecipeListViewModel}">
+                <views:RecipeResultsListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:FullRecipeViewModel}">
+                <views:SingleRecipeView/>
             </DataTemplate>
         </Grid.Resources>
 

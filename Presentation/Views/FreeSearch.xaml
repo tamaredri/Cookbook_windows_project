@@ -18,7 +18,7 @@
                      FontFamily="Calibri"
                      TextWrapping="Wrap"
                      HorizontalAlignment="Right"
-                     Text="Chocolate Cake…" 
+                     Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" 
                      Margin="0,0, 15,0" 
                      FontSize="22" FontWeight="Medium"
                      BorderBrush="Black"/>

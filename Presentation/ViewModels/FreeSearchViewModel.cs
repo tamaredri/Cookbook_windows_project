@@ -19,9 +19,24 @@ namespace Presentation.ViewModels
             _navigationStore = navigationStore;
         }
 
-        public string? SearchQuery { get; set; }
+        private string? _searchQuery = "Chocolate Cake";
 
-        public ICommand? ApplySearchCommand => new CommandBase(e => OnApplySearchCommand());
+        public string? SearchQuery
+        {
+            get { return _searchQuery; }
+            set
+            {
+                _searchQuery = value; OnPropertyChanged(nameof(SearchQuery));
+            }
+        }
+
+        public ICommand? ApplySearchCommand => new CommandBase(e => OnApplySearchCommand(), 
+                                                               canExecute => CanApplySearch());
+
+        private bool CanApplySearch()
+        {
+            return !string.IsNullOrEmpty(SearchQuery);
+        }
 
         private void OnApplySearchCommand()
         {

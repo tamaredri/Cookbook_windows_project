@@ -16,21 +16,14 @@ using System.Windows.Shapes;
 
 namespace Presentation.Views
 {
-
-    
-
     /// <summary>
     /// Interaction logic for FreeSearch.xaml
     /// </summary>
     public partial class FreeSearch : UserControl
     {
-
         public FreeSearch()
         {
             InitializeComponent();
-            
         }
-
-        
     }
 }
