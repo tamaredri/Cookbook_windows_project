@@ -17,9 +17,9 @@ namespace Presentation.ViewModels
 
         public EntryViewModel()
         {
-            FreeSearchCommand = new OpenFreeSearchCommand();
-            IngredientSearchCommand = new OpenIngredientSearchCommand();
-            MyRecipesCommand = new GetMyRecipesCommand();
+            //FreeSearchCommand = new OpenFreeSearchCommand();
+            //IngredientSearchCommand = new OpenIngredientSearchCommand();
+            //MyRecipesCommand = new GetMyRecipesCommand();
         }
     }
 }

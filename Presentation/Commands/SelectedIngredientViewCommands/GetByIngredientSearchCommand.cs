@@ -8,9 +8,8 @@ namespace Presentation.Commands.SelectedIngredientViewCommands
 {
     internal class GetByIngredientSearchCommand : CommandBase
     {
-        public override void Execute(object? parameter)
+        public GetByIngredientSearchCommand(Action<object>? execute, Func<object, bool>? canExecute = null) : base(execute, canExecute)
         {
-            throw new NotImplementedException();
         }
     }
 }

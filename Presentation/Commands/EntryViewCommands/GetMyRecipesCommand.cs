@@ -8,9 +8,8 @@ namespace Presentation.Commands.EntryViewCommands
 {
     public class GetMyRecipesCommand : CommandBase
     {
-        public override void Execute(object? parameter)
+        public GetMyRecipesCommand(Action<object>? execute, Func<object, bool>? canExecute = null) : base(execute, canExecute)
         {
-            throw new NotImplementedException();
         }
     }
 }

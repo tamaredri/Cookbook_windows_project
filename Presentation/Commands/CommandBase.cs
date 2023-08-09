@@ -7,20 +7,32 @@ using System.Windows.Input;
 
 namespace Presentation.Commands
 {
-    public abstract class CommandBase : ICommand
+    public class CommandBase : ICommand
     {
-        public event EventHandler? CanExecuteChanged;
+        private Action<object>? _execute;
+        private Func<object, bool>? _canExecute;
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        public CommandBase(Action<object>? execute, Func<object, bool>? canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
 
         public virtual bool CanExecute(object? parameter)
         {
-            return true;
+            return _canExecute == null || _canExecute(parameter!);
         }
 
-        public abstract void Execute(object? parameter);
-
-        protected void OnCanExecutedChanged()
+        public void Execute(object? parameter)
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            _execute!(parameter!);
         }
+
     }
 }

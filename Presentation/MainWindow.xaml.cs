@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Presentation.Models;
+using Presentation.Stores;
+using Presentation.ViewModels;
+using Presentation.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,16 +24,11 @@ namespace Presentation
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
-            //double screenWidth = SystemParameters.PrimaryScreenWidth * 0.1;
-            //double screenHeight = SystemParameters.PrimaryScreenHeight * 0.3;
         }
 
-        private void SearchIngredient_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

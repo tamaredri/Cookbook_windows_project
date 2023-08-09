@@ -8,9 +8,8 @@ namespace Presentation.Commands.EntryViewCommands
 {
     public class OpenIngredientSearchCommand : CommandBase
     {
-        public override void Execute(object? parameter)
+        public OpenIngredientSearchCommand(Action<object>? execute, Func<object, bool>? canExecute = null) : base(execute, canExecute)
         {
-            throw new NotImplementedException();
         }
     }
 }

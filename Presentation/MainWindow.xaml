@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Presentation"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:views="clr-namespace:Presentation.Views"
+        xmlns:vms="clr-namespace:Presentation.ViewModels"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -14,7 +15,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="500" Width="650">
+        Title="MainWindow" Height="500" Width="650"
+        DataContext="{Binding MainViewModel}">
 
     <!--<Window.Resources>
         --><!-- Define the FontFamily for the MainWindow as DynamicResource --><!--
@@ -22,10 +24,18 @@
     </Window.Resources>-->
     
     <Grid Background="#EEEEEE">
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:RecipeListViewModel}">
+                <views:RecipeResultsListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:FreeSearchViewModel}">
+                <views:FreeSearch/>
+            </DataTemplate>
+        </Grid.Resources>
 
-        <!--<views:RecipeResultsListView/>-->
+        <ContentControl Content="{Binding CurrentViewModel}"/>
         <!--<views:SingleRecipeView />-->
-        <views:selectedIngredientsList/>
+        <!--<views:selectedIngredientsList/>-->
         <!--<views:UserRecipeInformation/>-->
         <!--<views:FreeSearch></views:FreeSearch>-->
         <!--<views:Entry></views:Entry>-->

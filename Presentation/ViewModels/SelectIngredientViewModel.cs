@@ -23,7 +23,7 @@ namespace Presentation.ViewModels
         {
             _ingredientList = new ObservableCollection<string?>();
 
-            SearchCommand = new GetByIngredientSearchCommand();
+            //SearchCommand = new GetByIngredientSearchCommand();
         }
 
     }
