@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
              >
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -128,6 +128,10 @@
         </Grid>
 
         <Grid Name="CommentAndRatingGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="122*"/>
+                <ColumnDefinition Width="85*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -138,13 +142,11 @@
                  materialDesign:HintAssist.Hint="Your Comment"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Stretch"
                  VerticalScrollBarVisibility="Auto"
                  Text="{Binding Comment}"
-                 Margin="10" Height="100"/>
+                 Margin="10,10,10,10" Height="100" Grid.ColumnSpan="2"/>
 
-            <DockPanel Name="RatingAndSaveDockPanel" Grid.Row="1">
+            <DockPanel Name="RatingAndSaveDockPanel" Grid.Row="1" Grid.ColumnSpan="2">
                 <Button x:Name="editComment"
                     Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                     DockPanel.Dock="Right"
@@ -156,13 +158,10 @@
                     <materialDesign:PackIcon Kind="ContentSave" />
                 </Button>
 
-                <!--<StackPanel>
-                    <Border DockPanel.Dock="Right">
-                        <materialDesign:RatingBar x:Name="BasicRatingBar"
-                                          Padding="10"
-                                          Value="{Binding Rating}"/>
-                    </Border>
-                </StackPanel>-->
+                <materialDesign:RatingBar
+                    x:Name="ReadOnlyRatingBar"
+                    Value="{Binding Rating}"
+                    IsReadOnly="False" />
 
 
             </DockPanel>

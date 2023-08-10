@@ -64,6 +64,7 @@ namespace Presentation.ViewModels
         private void SaveComments()
         {
             //save comments in db
+            //save rating in db
         }
 
         public SuccessDataViewModel(NavigationStore navigationStore, SuccessData successData)
