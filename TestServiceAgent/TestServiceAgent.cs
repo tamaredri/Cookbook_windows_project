@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using ServiceAgent.Spoonacular.REntities;
-
+using ServiceAgent.Hebcal;
+using System.Globalization;
 
 namespace ServiceAgent
 {
@@ -21,7 +22,7 @@ namespace ServiceAgent
             //var _spoonacular = application.Services.GetRequiredService<ISpoonacularService>();
             ISpoonacularService _spoonacular = new SpoonacularService();
 
-            testFreeSearch(_spoonacular);
+            //testFreeSearch(_spoonacular);
 
             Console.WriteLine("-------------------------------------------------------------------------");
             //testSearchByID(_spoonacular);
@@ -34,6 +35,15 @@ namespace ServiceAgent
 
             Console.WriteLine("-------------------------------------------------------------------------");
             //testGetMatchingIngridients(_spoonacular);
+
+            testGetDate(new HebcalService());
+        }
+
+        private static void testGetDate(IHebcalService _hebcalService)
+        {
+            DateInformation d = _hebcalService.GetHebrewEvent(/*new DateTime(2015, 05 , 23), new DateTime(2015, 05, 23)*/DateTime.Now, DateTime.Now.AddDays(1)
+                ).GetAwaiter().GetResult();
+            Console.WriteLine(d);
         }
 
         private static void testGetMatchingIngridients(ISpoonacularService _spoonacular)
@@ -47,7 +57,7 @@ namespace ServiceAgent
 
         private static void testGetSimilarRecipe(ISpoonacularService _spoonacular)
         {
-            var recipes = _spoonacular.GetSimilarRecipe(655241).GetAwaiter().GetResult();
+            var recipes = _spoonacular.GetSimilarRecipes(655241).GetAwaiter().GetResult();
             foreach (Recipe recipe in recipes)
             {
                 Console.WriteLine(recipe);
@@ -67,7 +77,7 @@ namespace ServiceAgent
 
         private static void testSearchByIngridient(ISpoonacularService _spoonacular)
         {
-            List<Ingredient> ingridients = new List<Ingredient>() { new Ingredient() { Name = "egg" }, new Ingredient() { Name = "banana" } };
+            List<string> ingridients = new List<string>() {  "egg" , "banana" };
             var recipes = _spoonacular.GetRecipiesByIngredients(ingridients).GetAwaiter().GetResult();
 
             foreach (Recipe recipe in recipes)

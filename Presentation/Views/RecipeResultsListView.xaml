@@ -59,6 +59,8 @@
                                     
                                     <TextBlock HorizontalAlignment="Center" 
                                                Text="{Binding Title}" 
+                                               TextWrapping="Wrap" 
+                                               Width ="145"
                                                FontSize="13"
                                                Margin="10"/>
                                 </StackPanel>

@@ -57,9 +57,19 @@ namespace Presentation.ViewModels
         }
 
 
-        public ICommand? AddTodayDateCommand => new CommandBase(execute => 
-                                                                    _usedDates?.Add(
-                                                                        new UsedDatesViewModel(new UsedDate(){ Date = DateTime.Now, Description = "..." })));
+        public ICommand? AddTodayDateCommand => new CommandBase(execute => AddDate());
+        private void AddDate()
+        {
+            try
+            {
+                UsedDate d = _serverAccess!.GetDateEvent(DateTime.Now, DateTime.Now.AddDays(3));
+                _usedDates?.Add(new UsedDatesViewModel(d));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         public ICommand? SaveChangesCommand => new CommandBase(execute => SaveComments());
         private void SaveComments()

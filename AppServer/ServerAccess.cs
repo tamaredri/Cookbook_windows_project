@@ -1,4 +1,5 @@
 ﻿using AppServer.Models;
+using ServiceAgent.Hebcal;
 using ServiceAgent.Spoonacular;
 using ServiceAgent.Spoonacular.REntities;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -9,10 +10,12 @@ namespace AppServer
     public class ServerAccess : IServerAccess
     {
         private readonly ISpoonacularService _spoonacularService;
+        private readonly IHebcalService _hebcalService;
 
         public ServerAccess()
         {
             _spoonacularService = new SpoonacularService();
+            _hebcalService = new HebcalService();
         }
 
 
@@ -29,6 +32,8 @@ namespace AppServer
                                             Image = recipe.Image,
                                             Title = recipe.Title,
                                             Summary = recipe.Summary,
+                                            Servings = recipe.Servings, 
+                                            ReadyInMinutes = recipe.ReadyInMinutes,
                                             Ingridients = (from i in recipe.Ingridients
                                                            select new IngredientForRecipeData()
                                                            {
@@ -99,5 +104,22 @@ namespace AppServer
                         Title = r.Title
                     });
         }
+
+        //------------------------------------------------------------------
+
+        public UsedDate GetDateEvent(DateTime start, DateTime end)
+        {
+            DateInformation useDate;
+
+            try
+            {
+                useDate = _hebcalService.GetHebrewEvent(start, end)
+                                           .GetAwaiter().GetResult();
+
+                return new UsedDate() { Date = useDate.Date, Description = useDate.Title /*ID*/};
+            }
+            catch (Exception) { throw; }
+        }
+        
     }
 }

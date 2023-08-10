@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using System.Text.RegularExpressions;
 
 namespace Presentation.ViewModels
 {
@@ -73,7 +75,7 @@ namespace Presentation.ViewModels
             Image = fullRecipe.Image;
             ReadyInMinutes = fullRecipe.ReadyInMinutes;
             Servings = fullRecipe.Servings;
-            Summary = fullRecipe.Summary;
+            Summary = Regex.Replace(fullRecipe.Summary!, "<.*?>", ""); 
 
             _ingredients = new ObservableCollection<IngredientInRecipeViewModel>(
                 (from i in fullRecipe.Ingridients

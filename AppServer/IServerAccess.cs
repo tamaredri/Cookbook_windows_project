@@ -33,5 +33,9 @@ namespace AppServer
         /// <returns></returns>
         IEnumerable<BasicRecipeData> GetSimilarRecipes(int ID);
         #endregion
+
+        #region Hebcal
+        UsedDate GetDateEvent(DateTime start, DateTime end);
+        #endregion
     }
 }

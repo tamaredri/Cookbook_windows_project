@@ -75,7 +75,7 @@
 
             </StackPanel>
 
-            <Button VerticalAlignment="Top"
+            <Button x:Name="return" VerticalAlignment="Top"
                     Margin="0,15,10,0"
                     Background="Transparent" 
                     BorderBrush="Transparent"
@@ -89,6 +89,7 @@
             </Button>
 
             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                       TextWrapping="Wrap" 
                        Text="{Binding Title}" VerticalAlignment="Center" 
                        FontFamily="Candara"
                        FontWeight="ExtraBold"
@@ -108,7 +109,8 @@
                            Margin="15 0 0 0"
                            Source="{Binding Image}"/>
 
-                    <TextBlock TextWrapping="Wrap" 
+                    <ScrollViewer>
+                        <TextBlock TextWrapping="Wrap" 
                                VerticalAlignment="Center"
                                FontFamily="Calibri"
                                Style="{StaticResource MaterialDesignBody2TextBlock}"
@@ -116,6 +118,8 @@
                                MaxWidth="500"
                                Margin="5 0 0 0"
                                Text="{Binding Summary}" Width="405"/>
+                    </ScrollViewer>
+                    
                 </StackPanel>
 
                 <Rectangle Height="1" Width="{Binding ActualWidth, ElementName=RecipeDetails}"
