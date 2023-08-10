@@ -35,7 +35,7 @@ namespace AppServer
         #endregion
 
         #region Hebcal
-        UsedDate GetDateEvent(DateTime start, DateTime end);
+        UsedDate GetDateEvent();
         #endregion
     }
 }

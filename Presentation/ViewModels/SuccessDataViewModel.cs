@@ -62,8 +62,7 @@ namespace Presentation.ViewModels
         {
             try
             {
-                UsedDate d = _serverAccess!.GetDateEvent(DateTime.Now, DateTime.Now.AddDays(3));
-                _usedDates?.Add(new UsedDatesViewModel(d));
+                _usedDates?.Add(new UsedDatesViewModel(_serverAccess!.GetDateEvent()));
             }
             catch (Exception e)
             {

@@ -107,13 +107,13 @@ namespace AppServer
 
         //------------------------------------------------------------------
 
-        public UsedDate GetDateEvent(DateTime start, DateTime end)
+        public UsedDate GetDateEvent()
         {
             DateInformation useDate;
 
             try
             {
-                useDate = _hebcalService.GetHebrewEvent(start, end)
+                useDate = _hebcalService.GetHebrewEvent(DateTime.Now, DateTime.Now.AddDays(3))
                                            .GetAwaiter().GetResult();
 
                 return new UsedDate() { Date = useDate.Date, Description = useDate.Title /*ID*/};

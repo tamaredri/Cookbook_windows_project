@@ -25,7 +25,7 @@ namespace ServiceAgent.Hebcal
         /// </returns>
         private string? GetFullQuery()
         {
-            var a = $"/hebcal?v=1&cfg=json&maj=on&start={Parameter1}&end={Parameter2}/items";
+            var a = $"/hebcal?v=1&cfg=json&maj=on&&min=on&mod=on&nx=on&ss=on&mf=on&start={Parameter1}&end={Parameter2}/items";
             return a;
         }
 
