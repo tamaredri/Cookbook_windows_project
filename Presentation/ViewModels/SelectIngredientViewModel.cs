@@ -48,6 +48,8 @@ namespace Presentation.ViewModels
         public ICommand? AddIngredientCommad => new CommandBase(execute => { _ingredientList!.Add(SearchQuery); },
                                                                 canExecute => CanAddIngredient());
 
+        public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
+
         private bool CanAddIngredient()
         {
             return !string.IsNullOrEmpty(SearchQuery);

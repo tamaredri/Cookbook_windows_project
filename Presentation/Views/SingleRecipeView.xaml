@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Presentation.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="600" 
-             Background="#EEEEEE" DataContext="{Binding FullRecipeViewModel}">
+             Background="#EEEEEE" >
 
     <Grid Background="Transparent" Name="parentGrid">
         <Grid.RowDefinitions>
@@ -74,6 +74,19 @@
                 </StackPanel>
 
             </StackPanel>
+
+            <Button VerticalAlignment="Top"
+                    Margin="0,15,10,0"
+                    Background="Transparent" 
+                    BorderBrush="Transparent"
+                    Width="60"
+                    ToolTip="Resource name: MaterialDesignPaperLightButton"
+                    Command="{Binding ReturnCommand}">
+                <materialDesign:PackIcon Kind="KeyboardBackspace" 
+                                         Width="100" Height="30" 
+                                         VerticalContentAlignment="Center"
+                                         HorizontalAlignment="Center"/>
+            </Button>
 
             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                        Text="{Binding Title}" VerticalAlignment="Center" 
@@ -203,6 +216,7 @@
                         VerticalAlignment="Top"
                         Margin="10"
                         Content="Find Similar Recipes"
+                        Command="{Binding FindSimilarRecipesCommand}"
                         Background="#537188"/>
 
                 <Expander Header="Personalized Data - Your Recipe"

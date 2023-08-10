@@ -20,10 +20,10 @@ namespace Presentation.Models
 
         public string? Summary { get; set; }
 
-        public IEnumerable<IngredientInRecipe>? Ingridients { get; set; }
+        public IEnumerable<IngredientInRecipe>? Ingridients { get; set; } = new List<IngredientInRecipe>();
 
-        public IEnumerable<RecipeStep>? Steps { get; set; }
+        public IEnumerable<RecipeStep>? Steps { get; set; } = new List<RecipeStep>();
 
-        public SuccessData? SuccessData { get; set; }
+        public SuccessData? SuccessData { get; set; } = new SuccessData();
     }
 }

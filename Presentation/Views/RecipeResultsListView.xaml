@@ -15,6 +15,21 @@
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
 
+
+        <Button VerticalAlignment="Top"
+                Margin="0,15,10,0"
+                Background="Transparent" 
+                BorderBrush="Transparent"
+                Width="60"
+                HorizontalAlignment="Left"
+                ToolTip="Resource name: MaterialDesignPaperLightButton"
+                Command="{Binding ReturnCommand}">
+            <materialDesign:PackIcon Kind="KeyboardBackspace" 
+                                         Width="100" Height="30" 
+                                         VerticalContentAlignment="Center"
+                                         HorizontalAlignment="Center"/>
+        </Button>
+
         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                    Grid.Row="0"
                    Text="RESIPE LIST"

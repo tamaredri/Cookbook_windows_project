@@ -40,6 +40,9 @@
             <DataTemplate DataType="{x:Type vms:FullRecipeViewModel}">
                 <views:SingleRecipeView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:SuccessDataViewModel}">
+                <views:UserRecipeInformation/>
+            </DataTemplate>
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"/>

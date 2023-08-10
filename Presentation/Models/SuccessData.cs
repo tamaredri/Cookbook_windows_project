@@ -14,8 +14,8 @@ namespace Presentation.Models
 
         public string? Comment { get; set; }
 
-        public List<string>? Images { get; set; }
+        public List<string>? Images { get; set; } = new List<string>();
 
-        public List<UsedDate>? usedDates { get; set; }
+        public List<UsedDate>? usedDates { get; set; } = new List<UsedDate>();
     }
 }

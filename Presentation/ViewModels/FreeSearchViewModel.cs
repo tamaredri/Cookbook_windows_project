@@ -33,6 +33,8 @@ namespace Presentation.ViewModels
         public ICommand? ApplySearchCommand => new CommandBase(e => OnApplySearchCommand(), 
                                                                canExecute => CanApplySearch());
 
+        public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
+
         private bool CanApplySearch()
         {
             return !string.IsNullOrEmpty(SearchQuery);

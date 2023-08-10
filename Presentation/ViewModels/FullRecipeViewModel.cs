@@ -1,4 +1,6 @@
-﻿using Presentation.Models;
+﻿using Presentation.Commands;
+using Presentation.Models;
+using Presentation.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +14,7 @@ namespace Presentation.ViewModels
     public class FullRecipeViewModel: ViewModelBase
     {
         private readonly FullRecipe _fullRecipe;
+        private readonly NavigationStore _navigationStore;
 
         public int ID => _fullRecipe.ID;
         public string? Title => _fullRecipe.Title;
@@ -35,11 +38,45 @@ namespace Presentation.ViewModels
             set { _successData = value; OnPropertyChanged(nameof(SuccessData)); }
         }
 
-        public ICommand? FindSimilarRecipesCommand { get; set; }
-
-
-        public FullRecipeViewModel(FullRecipe fullRecipe)
+        public ICommand? FindSimilarRecipesCommand => new CommandBase(execute => OpenSimilarRecipe());
+        private void OpenSimilarRecipe()
         {
+            var a = new List<RecipeToList>(){
+                 new RecipeToList(){ID = 1,
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 1"},
+                 new RecipeToList(){ID = 2,
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 2"},
+                 new RecipeToList(){ID = 3,
+
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 3"},
+                 new RecipeToList(){ID = 4,
+
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 4"},
+                 new RecipeToList(){ID = 5,
+
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 5"},
+                 new RecipeToList(){ID = 6,
+
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 6"},
+                 new RecipeToList(){ID = 7,
+
+                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
+                     Title = "lettuce salad 7"} };
+
+            _navigationStore.CurrentViewModel = new RecipeListViewModel(_navigationStore, a);
+        }
+
+        public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
+
+        public FullRecipeViewModel(NavigationStore navigationStore, FullRecipe fullRecipe)
+        {
+            _navigationStore = navigationStore;
             _fullRecipe = fullRecipe;
 
             _ingredients = new ObservableCollection<IngredientInRecipeViewModel>(
@@ -50,7 +87,7 @@ namespace Presentation.ViewModels
                 (from i in fullRecipe.Steps
                  select new RecipeStepViewModel(i)).ToList());
 
-            _successData = new SuccessDataViewModel(fullRecipe.SuccessData!);
+            _successData = new SuccessDataViewModel(_navigationStore, fullRecipe.SuccessData!);
 
         }
 

@@ -9,8 +9,22 @@
     <Grid>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
-           
 
+
+            <Button VerticalAlignment="Top"
+                    Margin="0,15,10,0"
+                    Background="Transparent" 
+                    BorderBrush="Transparent"
+                    Width="60"
+                    ToolTip="Resource name: MaterialDesignPaperLightButton"
+                    Command="{Binding ReturnCommand}">
+                <materialDesign:PackIcon Kind="KeyboardBackspace" 
+                                         Width="100" Height="30" 
+                                         VerticalContentAlignment="Center"
+                                         HorizontalAlignment="Center"/>
+            </Button>
+            
+            
             <TextBox x:Name="freeSearchRecipe"
                      Width="350" Height="60"
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"

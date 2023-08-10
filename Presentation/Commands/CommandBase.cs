@@ -9,8 +9,8 @@ namespace Presentation.Commands
 {
     public class CommandBase : ICommand
     {
-        private Action<object>? _execute;
-        private Func<object, bool>? _canExecute;
+        protected Action<object>? _execute;
+        protected Func<object, bool>? _canExecute;
 
         public event EventHandler? CanExecuteChanged
         {
@@ -24,7 +24,7 @@ namespace Presentation.Commands
             _canExecute = canExecute;
         }
 
-        public virtual bool CanExecute(object? parameter)
+        public bool CanExecute(object? parameter)
         {
             return _canExecute == null || _canExecute(parameter!);
         }

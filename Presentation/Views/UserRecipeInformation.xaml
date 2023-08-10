@@ -7,7 +7,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-             DataContext="{Binding SuccessDataViewModel}">
+             >
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -31,7 +32,8 @@
                         Height="40" Width="40"
                         VerticalAlignment="Center"
                         Background="#537188"
-                        BorderBrush="#537188">
+                        BorderBrush="#537188"
+                        Command="{Binding AddImageCommand}">
                     <materialDesign:PackIcon Kind="ImagePlus" />
                 </Button>
 
@@ -119,6 +121,7 @@
                     Margin="10"
                     ToolTip="If you used this recipe today, please save it to your history by pressing this button."
                     Content="Save today to the list"
+                    Command="{Binding AddTodayDateCommand}"
                     Background="#537188"/>
 
 
@@ -148,15 +151,19 @@
                     Margin="10 0 20 10"
                     VerticalAlignment="Center"
                     Background="#537188"
-                    BorderBrush="#537188">
+                    BorderBrush="#537188"
+                    Command="{Binding SaveChangesCommand}">
                     <materialDesign:PackIcon Kind="ContentSave" />
                 </Button>
 
-                <materialDesign:RatingBar x:Name="BasicRatingBar"
-                                      Grid.Column="1"
-                                      VerticalAlignment="Top"
-                                      Padding="10"
-                                      Value="{Binding Rating}"/>
+                <!--<StackPanel>
+                    <Border DockPanel.Dock="Right">
+                        <materialDesign:RatingBar x:Name="BasicRatingBar"
+                                          Padding="10"
+                                          Value="{Binding Rating}"/>
+                    </Border>
+                </StackPanel>-->
+
 
             </DockPanel>
 
