@@ -1,5 +1,6 @@
-﻿using Presentation.Commands;
-using Presentation.Models;
+﻿using AppServer;
+using Presentation.Commands;
+using AppServer.Models;
 using Presentation.Stores;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows;
 
 namespace Presentation.ViewModels
 {
     public class RecipeListViewModel : ViewModelBase
     {
         private NavigationStore _navigationStore;
+        private readonly IServerAccess? _serverAccess;
 
-        public RecipeListViewModel(NavigationStore navigation, IEnumerable<RecipeToList> RecipesToList)
+        public RecipeListViewModel(IServerAccess? serverAccess, 
+                                   NavigationStore navigation, 
+                                   IEnumerable<BasicRecipeData> RecipesToList)
         {
             _navigationStore = navigation;
+            _serverAccess = serverAccess;
             _Recipes = new ObservableCollection<RecipeForListViewModel>((from r in RecipesToList
                                                                          select new RecipeForListViewModel(r))
                                                                          .ToList());
@@ -30,7 +36,11 @@ namespace Presentation.ViewModels
         public RecipeForListViewModel? SelectedItem
         {
             get { return _selectedItem; }
-            set { _selectedItem = value; OnPropertyChanged(nameof(SelectedItem)); }
+            set 
+            { 
+                _selectedItem = value; 
+                OnPropertyChanged(nameof(SelectedItem)); 
+            }
         }
 
         public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
@@ -39,8 +49,22 @@ namespace Presentation.ViewModels
 
         private void OpenRecipe()
         {
-            _navigationStore.CurrentViewModel = new FullRecipeViewModel(_navigationStore,
-                new FullRecipe()
+            try
+            {
+                var selectedRecipe = _serverAccess!.GetRecipeById(SelectedItem!.ID);
+                _navigationStore.CurrentViewModel = new FullRecipeViewModel(_serverAccess,
+                                                                           _navigationStore,
+                                                                            selectedRecipe);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+        }
+
+        /*
+         new FullRecipe()
                 {
                     ID = 1,
                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
@@ -70,9 +94,8 @@ namespace Presentation.ViewModels
                                                            new UsedDate() { Date = new DateTime(2023, 8, 1), Description = "purim" },
                         }
                     }
-                }); 
-        }
-
+                }
+         */
 
     }
 }

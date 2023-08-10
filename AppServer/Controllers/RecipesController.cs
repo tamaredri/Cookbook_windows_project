@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models;
+using AppServer.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebAPI.Controllers
+namespace AppServer.Controllers
 {
     [Route("api/Recipes")]
     [ApiController]
@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
 
         // GET: api/Rcepies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
+        public async Task<ActionResult<IEnumerable<RecipeDB>>> GetRecipes()
         {
             if (_dbContext.Recipes == null) { return NotFound(); }
 
@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
 
         // GET: api/Rcepies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipe(int id)
+        public async Task<ActionResult<RecipeDB>> GetRecipe(int id)
         {
             if (_dbContext.Recipes == null) { return NotFound(); }
             var recipe = await _dbContext.Recipes.FindAsync(id);
@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
 
         // POST: api/Rcepies
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
+        public async Task<ActionResult<RecipeDB>> PostRecipe(RecipeDB recipe)
         {
             _dbContext.Recipes.Add(recipe);
             await _dbContext.SaveChangesAsync();
@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
 
         // PUT: api/Rcepies/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Recipe>> PutRecipe(int id, Recipe recipe)
+        public async Task<ActionResult<RecipeDB>> PutRecipe(int id, RecipeDB recipe)
         {
             if(id != recipe.Id) { return BadRequest(); }
 
@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
 
         // DELETE: api/Rcepies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Recipe>> DeleteRecipe(int id)
+        public async Task<ActionResult<RecipeDB>> DeleteRecipe(int id)
         {
             if (_dbContext.Recipes == null) { return NotFound(); }
 

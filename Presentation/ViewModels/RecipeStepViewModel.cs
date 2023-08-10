@@ -1,23 +1,17 @@
-﻿using Presentation.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppServer.Models;
 
 namespace Presentation.ViewModels
 {
     public class RecipeStepViewModel :ViewModelBase
     {
-        private readonly RecipeStep? _recipeStep;
+        public int Number { get; }
 
-        public int Number => _recipeStep!.Number;
+        public string? Step { get; }
 
-        public string? Step => _recipeStep!.Step;
-
-        public RecipeStepViewModel(RecipeStep recipeStep)
+        public RecipeStepViewModel(RecipeStepData recipeStep)
         {
-            _recipeStep = recipeStep;
+            Number = recipeStep!.Number;
+            Step = recipeStep!.Step;
         }
     }
 }

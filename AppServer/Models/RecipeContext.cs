@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WebAPI.Models
+namespace AppServer.Models
 {
     public class RecipeContext : DbContext
     {
@@ -9,9 +9,9 @@ namespace WebAPI.Models
 
         //DbSet<Recipe> Recipes { get; set; } = null!;
 
-        private DbSet<Recipe> recipes = null!;
+        private DbSet<RecipeDB> recipes = null!;
 
-        public DbSet<Recipe> Recipes
+        public DbSet<RecipeDB> Recipes
         {
             get { return recipes; }
             set { recipes = value; }

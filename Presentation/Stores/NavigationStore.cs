@@ -27,7 +27,6 @@ namespace Presentation.Stores
                 CurrentViewModel = _stackView!.Pop();
                 _stackView.Pop();
             }
-
         }
 
         private ViewModelBase? _currentViewModel;

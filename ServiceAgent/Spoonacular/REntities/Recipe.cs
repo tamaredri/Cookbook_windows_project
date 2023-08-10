@@ -17,7 +17,7 @@ namespace ServiceAgent.Spoonacular.REntities
         public string? Title { get; set; }
 
         [JsonProperty("image")]
-        public string? Image { get; set; }
+        public string? Image { get; set; } = "https://spoonacular.com/IngredientImages/sliced-carrot.png";
 
         public override string? ToString()
         {

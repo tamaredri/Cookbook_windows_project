@@ -1,7 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using AppServer;
+using Microsoft.Win32;
 using Presentation.Commands;
-using Presentation.Models;
-using Presentation.Stores;
+using AppServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +15,10 @@ namespace Presentation.ViewModels
 {
     public class SuccessDataViewModel : ViewModelBase
     {
-        private readonly SuccessData _successData;
+        
+        private readonly IServerAccess? _serverAccess;
+        
+        private int ID { get; }
 
         private double rating;
         public double Rating { 
@@ -33,11 +36,9 @@ namespace Presentation.ViewModels
         private ObservableCollection<string>? _images;
         public IEnumerable<string>? Images => _images;
 
-        private NavigationStore _navigationStore;
-
         private ObservableCollection<UsedDatesViewModel>? _usedDates;
-
         public IEnumerable<UsedDatesViewModel>? UsedDates => _usedDates;
+
 
         public ICommand? AddImageCommand => new CommandBase(execute => UploadImage());
         private void UploadImage()
@@ -67,11 +68,10 @@ namespace Presentation.ViewModels
             //save rating in db
         }
 
-        public SuccessDataViewModel(NavigationStore navigationStore, SuccessData successData)
+        public SuccessDataViewModel(IServerAccess? serverAccess, DBRecipeSuccessData successData)
         {
-            _navigationStore = navigationStore;
-
-            _successData = successData;
+            _serverAccess = serverAccess;
+            ID = successData.ID;
 
             rating = successData.Rating;
             comment = successData.Comment;
@@ -79,7 +79,7 @@ namespace Presentation.ViewModels
             _images = new ObservableCollection<string>(successData.Images!);
 
             _usedDates = new ObservableCollection<UsedDatesViewModel>(
-                            (from d in _successData.usedDates
+                            (from d in successData.UsedDates
                              select new UsedDatesViewModel(d)).ToList());
         }
 

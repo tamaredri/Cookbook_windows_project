@@ -1,4 +1,4 @@
-﻿using Presentation.Models;
+﻿using AppServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +9,11 @@ namespace Presentation.ViewModels
 {
     public class IngredientInRecipeViewModel : ViewModelBase
     {
-        private readonly IngredientInRecipe? ingredientInRecie;
+        public string? IngredientDescription { get; }
 
-        public string? IngredientDescription => $"{ingredientInRecie!.Amount} {ingredientInRecie!.Unit} {ingredientInRecie!.Name}.";
-
-        public IngredientInRecipeViewModel(IngredientInRecipe ingredient)
+        public IngredientInRecipeViewModel(IngredientForRecipeData ingredient)
         {
-            ingredientInRecie = ingredient;
+            IngredientDescription = $"{ingredient!.Amount} {ingredient!.Unit} {ingredient!.Name}.";
         }
-
     }
 }

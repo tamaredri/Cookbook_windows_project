@@ -1,23 +1,20 @@
-﻿using Presentation.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppServer.Models;
 
 namespace Presentation.ViewModels
 {
     public class RecipeForListViewModel : ViewModelBase
     {
-        private RecipeToList _RecipeToList;
+        public int ID { get; set; }
 
-        public string? Title => _RecipeToList.Title;
+        public string? Title { get; }
 
-        public string? Image => _RecipeToList.Image;
+        public string? Image { get; }
 
-        public RecipeForListViewModel(RecipeToList recipeToList)
+        public RecipeForListViewModel(BasicRecipeData recipeToList)
         {
-            _RecipeToList = recipeToList;
+            ID = recipeToList.ID;
+            Title = recipeToList.Title;
+            Image = recipeToList.Image;
         }
     }
 }

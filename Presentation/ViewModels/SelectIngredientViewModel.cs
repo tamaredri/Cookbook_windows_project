@@ -1,5 +1,6 @@
-﻿using Presentation.Commands;
-using Presentation.Models;
+﻿using AppServer;
+using Presentation.Commands;
+using AppServer.Models;
 using Presentation.Stores;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Presentation.ViewModels
     {        
         
         private NavigationStore _navigationStore;
+        private readonly IServerAccess? _serverAccess;
 
         private string? _searchQuery = "Banana";
 
@@ -45,68 +47,35 @@ namespace Presentation.ViewModels
         public IEnumerable<string?>? IngredientList => _ingredientList;
 
 
-        public ICommand? AddIngredientCommad => new CommandBase(execute => { _ingredientList!.Add(SearchQuery); },
-                                                                canExecute => CanAddIngredient());
+        public ICommand? AddIngredientCommad => new CommandBase(execute => { _ingredientList!.Add(SearchQuery); 
+                                                                             SearchQuery = string.Empty; },
+                                                                canExecute => { return !string.IsNullOrEmpty(SearchQuery); });
 
-        public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
+        public ICommand? RemoveIngredientCommand => new CommandBase(execute => { _ingredientList?.Remove(execute as string); });
 
-        private bool CanAddIngredient()
-        {
-            return !string.IsNullOrEmpty(SearchQuery);
-        }
-
-        public ICommand? RemoveIngredientCommand => new CommandBase(execute => { DeleteIngredientMathod(execute); });
-
-        private void DeleteIngredientMathod(object execute)
-        {
-            _ingredientList?.Remove(execute as string);
-        }
-
-        public ICommand? SearchCommand => new CommandBase(execute => ApplySearch(), canExecute => CanApplySearch());
-
-        private bool CanApplySearch()
-        {
-            return _ingredientList == null || _ingredientList.Count() != 0;
-        }
+        public ICommand? SearchCommand => new CommandBase(execute => ApplySearch(), 
+                                                          canExecute => { return _ingredientList == null || _ingredientList.Count() != 0; });
 
         private void ApplySearch()
         {
-            var a = new List<RecipeToList>(){
-                 new RecipeToList(){ID = 1,
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 1"},
-                 new RecipeToList(){ID = 2,
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 2"},
-                 new RecipeToList(){ID = 3,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 3"},
-                 new RecipeToList(){ID = 4,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 4"},
-                 new RecipeToList(){ID = 5,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 5"},
-                 new RecipeToList(){ID = 6,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 6"},
-                 new RecipeToList(){ID = 7,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 7"} };
-            _navigationStore.CurrentViewModel = new RecipeListViewModel(_navigationStore, a);
+            try
+            {
+                var a = _serverAccess!.GetRecipiesByIngredients(IngredientList!);
+                _navigationStore.CurrentViewModel = new RecipeListViewModel(_serverAccess, _navigationStore, a);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
 
-        public SelectIngredientViewModel(NavigationStore navigationStore)
+        public SelectIngredientViewModel(IServerAccess? serverAccess, NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
+            _serverAccess = serverAccess;
             _ingredientList = new ObservableCollection<string?>() { "Banana"};
-
         }
     }
 }

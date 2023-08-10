@@ -19,11 +19,5 @@ namespace Presentation.Commands
             _navigation = navigation;
             _execute = e => _navigation.returnView();
         }
-
-        
-
-
-
-        
     }
 }

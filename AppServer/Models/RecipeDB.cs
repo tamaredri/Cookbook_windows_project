@@ -1,6 +1,6 @@
-﻿namespace WebAPI.Models
+﻿namespace AppServer.Models
 {
-    public class Recipe
+    public class RecipeDB
     {
         public int Id { get; set; }
 

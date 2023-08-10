@@ -1,5 +1,6 @@
-﻿using Presentation.Commands;
-using Presentation.Models;
+﻿using AppServer;
+using Presentation.Commands;
+using AppServer.Models;
 using Presentation.Stores;
 using System;
 using System.Collections.Generic;
@@ -8,20 +9,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows;
 
 namespace Presentation.ViewModels
 {
     public class FullRecipeViewModel: ViewModelBase
     {
-        private readonly FullRecipe _fullRecipe;
+        private readonly IServerAccess? _serverAccess;
         private readonly NavigationStore _navigationStore;
-
-        public int ID => _fullRecipe.ID;
-        public string? Title => _fullRecipe.Title;
-        public string? Image => _fullRecipe.Image;
-        public int ReadyInMinutes => _fullRecipe.ReadyInMinutes;
-        public int Servings => _fullRecipe.Servings;
-        public string? Summary => _fullRecipe.Summary;
+       
+        public int ID { get; }
+        public string? Title { get; }
+        public string? Image { get; }
+        public int ReadyInMinutes { get; }
+        public int Servings { get; }
+        public string? Summary { get; }
 
 
         private ObservableCollection<IngredientInRecipeViewModel>? _ingredients;
@@ -35,49 +37,43 @@ namespace Presentation.ViewModels
         private SuccessDataViewModel? _successData;
         public SuccessDataViewModel? SuccessData {
             get { return _successData; }
-            set { _successData = value; OnPropertyChanged(nameof(SuccessData)); }
+            set { 
+                _successData = value; 
+                OnPropertyChanged(nameof(SuccessData)); 
+            }
         }
 
         public ICommand? FindSimilarRecipesCommand => new CommandBase(execute => OpenSimilarRecipe());
+
         private void OpenSimilarRecipe()
         {
-            var a = new List<RecipeToList>(){
-                 new RecipeToList(){ID = 1,
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 1"},
-                 new RecipeToList(){ID = 2,
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 2"},
-                 new RecipeToList(){ID = 3,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 3"},
-                 new RecipeToList(){ID = 4,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 4"},
-                 new RecipeToList(){ID = 5,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 5"},
-                 new RecipeToList(){ID = 6,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 6"},
-                 new RecipeToList(){ID = 7,
-
-                     Image = "https://chef-lavan.co.il/wp-content/uploads/old-storage/uploads/images/cf2a5b4afd4c80bc67b190f87a5752f1.jpg",
-                     Title = "lettuce salad 7"} };
-
-            _navigationStore.CurrentViewModel = new RecipeListViewModel(_navigationStore, a);
+            try
+            {
+                var similarRecipes = _serverAccess!.GetSimilarRecipes(ID);
+                _navigationStore.CurrentViewModel = new RecipeListViewModel(_serverAccess, 
+                                                                            _navigationStore, 
+                                                                            similarRecipes);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public ICommand? ReturnCommand => new ReturnViewCommand(_navigationStore);
 
-        public FullRecipeViewModel(NavigationStore navigationStore, FullRecipe fullRecipe)
+        public FullRecipeViewModel(IServerAccess? serverAccess, NavigationStore navigationStore, FullRecipeData fullRecipe)
         {
             _navigationStore = navigationStore;
-            _fullRecipe = fullRecipe;
+            _serverAccess = serverAccess;
+
+
+            ID = fullRecipe.ID;
+            Title = fullRecipe.Title;
+            Image = fullRecipe.Image;
+            ReadyInMinutes = fullRecipe.ReadyInMinutes;
+            Servings = fullRecipe.Servings;
+            Summary = fullRecipe.Summary;
 
             _ingredients = new ObservableCollection<IngredientInRecipeViewModel>(
                 (from i in fullRecipe.Ingridients
@@ -87,10 +83,7 @@ namespace Presentation.ViewModels
                 (from i in fullRecipe.Steps
                  select new RecipeStepViewModel(i)).ToList());
 
-            _successData = new SuccessDataViewModel(_navigationStore, fullRecipe.SuccessData!);
-
+            _successData = new SuccessDataViewModel(_serverAccess, fullRecipe.SuccessData!);
         }
-
-
     }
 }

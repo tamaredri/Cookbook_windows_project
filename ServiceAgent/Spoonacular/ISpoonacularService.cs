@@ -22,7 +22,7 @@ namespace ServiceAgent.Spoonacular
         /// </summary>
         /// <param name="ingredients">collections of ingredients for the search</param>
         /// <returns>collection of recipes using the ingredients</returns>
-        Task<IEnumerable<Recipe>> GetRecipiesByIngredients(IEnumerable<Ingredient> ingredients);
+        Task<IEnumerable<Recipe>> GetRecipiesByIngredients(IEnumerable<string> ingredients);
 
         /// <summary>
         /// Request a specific recipe using an ID number.
@@ -36,7 +36,7 @@ namespace ServiceAgent.Spoonacular
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>collection of similar recipes</returns>
-        Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID);
+        Task<IEnumerable<Recipe>> GetSimilarRecipes(int ID);
 
         /// <summary>
         /// Request 10 ingredients that match the ingredients query

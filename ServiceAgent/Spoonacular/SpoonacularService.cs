@@ -1,12 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using ServiceAgent.Spoonacular.REntities;
+using System.Net.Http.Headers;
 
 namespace ServiceAgent.Spoonacular
 {
@@ -43,7 +37,8 @@ namespace ServiceAgent.Spoonacular
         {
             Parameters = $"recipes/complexSearch?query={query}";
 
-            HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
+            HttpResponseMessage response = await client.GetAsync(GetFullQuery())
+                                                       .ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
                 throw new Exception("response StatusCode is error");
@@ -53,14 +48,14 @@ namespace ServiceAgent.Spoonacular
             return jsonObject!.results.ToObject<IEnumerable<Recipe>>();
         }
 
-        public async Task<IEnumerable<Recipe>> GetRecipiesByIngredients(IEnumerable<Ingredient> ingredients)
+        public async Task<IEnumerable<Recipe>> GetRecipiesByIngredients(IEnumerable<string> ingredients)
         {
             if (!ingredients.Any())
                 return new List<Recipe>();
             
             Parameters = $"recipes/findByIngredients?ingredients=";
-            foreach (Ingredient ingredient in ingredients)
-                    Parameters += ",+" + ingredient.Name;
+            foreach (string ingredient in ingredients)
+                    Parameters += ",+" + ingredient;
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
@@ -77,16 +72,21 @@ namespace ServiceAgent.Spoonacular
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
                 throw new Exception("response StatusCode is error");
+
             var jsonString = await response.Content.ReadAsStringAsync();
-            var recipeResponce = JsonConvert.DeserializeObject<IEnumerable<FullRecipe>>(jsonString)!.FirstOrDefault()!;
+            var recipeResponse = JsonConvert.DeserializeObject<IEnumerable<FullRecipe>>(jsonString)!.FirstOrDefault()!;
 
             //extract the steps from the json object
-            var recipeInstructions = JsonConvert.DeserializeObject<dynamic>(jsonString)!;
-            recipeResponce.Steps = recipeInstructions[0]!.analyzedInstructions[0].steps.ToObject<IEnumerable<RecipeStep>>();
-            return recipeResponce;
+            var dynamicRecipeResponse = JsonConvert.DeserializeObject<dynamic>(jsonString)!;
+            var analyzedInstructionsProperty = dynamicRecipeResponse[0]!.analyzedInstructions;
+            if (analyzedInstructionsProperty.HasValues)
+                recipeResponse.Steps = analyzedInstructionsProperty[0].steps.ToObject<IEnumerable<RecipeStep>>();
+            else recipeResponse.Steps = new List<RecipeStep>();
+
+            return recipeResponse;
         }
 
-        public async Task<IEnumerable<Recipe>> GetSimilarRecipe(int ID)
+        public async Task<IEnumerable<Recipe>> GetSimilarRecipes(int ID)
         {
             Parameters = $"recipes/{ID}/similar?";
 
