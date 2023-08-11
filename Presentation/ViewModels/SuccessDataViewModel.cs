@@ -75,6 +75,9 @@ namespace Presentation.ViewModels
         {
             //save comments in db
             //save rating in db
+            double a = rating;
+            var t = Images;
+            a = 3;
         }
 
         public SuccessDataViewModel(IServerAccess? serverAccess, DBRecipeSuccessData successData)

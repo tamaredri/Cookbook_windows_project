@@ -22,8 +22,8 @@ namespace Presentation.Stores
         {
             if (_stackView?.Count() > 1)
             {
-               if(_stackView.Peek() is FullRecipeViewModel)
-                    _stackView.Pop();
+               //if(_stackView.Peek() is FullRecipeViewModel)
+                    //_stackView.Pop();
                 CurrentViewModel = _stackView!.Pop();
                 _stackView.Pop();
             }

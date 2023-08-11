@@ -158,11 +158,11 @@
                     <materialDesign:PackIcon Kind="ContentSave" />
                 </Button>
 
-                <!--<materialDesign:RatingBar
+                <materialDesign:RatingBar
                     x:Name="ReadOnlyRatingBar"
-                    Value="{Binding Rating}"
-                    IsReadOnly="False" />-->
+                    Value="{Binding Rating}"/>
 
+                
 
             </DockPanel>
 
