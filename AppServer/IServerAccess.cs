@@ -37,5 +37,9 @@ namespace AppServer
         #region Hebcal
         UsedDate GetDateEvent();
         #endregion
+
+        #region Imagga
+        public bool DoesImageMatchRecipe(string spoonacularUrl, string newUrl);
+        #endregion
     }
 }

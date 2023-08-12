@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using ServiceAgent.Spoonacular.REntities;
 using ServiceAgent.Hebcal;
+using ServiceAgent.Imagga;
 using System.Globalization;
+using RestSharp;
+using static System.Net.WebRequestMethods;
 
 namespace ServiceAgent
 {
@@ -15,13 +18,10 @@ namespace ServiceAgent
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Testing:");
 
-            //var services = new ServiceCollection();
-            //Applications application = new Applications(services);
-            //var _spoonacular = application.Services.GetRequiredService<ISpoonacularService>();
             ISpoonacularService _spoonacular = new SpoonacularService();
-
+            IImaggaService imaggaService = new ImaggaService();
             //testFreeSearch(_spoonacular);
 
             Console.WriteLine("-------------------------------------------------------------------------");
@@ -36,9 +36,19 @@ namespace ServiceAgent
             Console.WriteLine("-------------------------------------------------------------------------");
             //testGetMatchingIngridients(_spoonacular);
 
-            testGetDate(new HebcalService());
+            Console.WriteLine("-------------------------------------------------------------------------");
+            //testGetDate(new HebcalService());
+
+            Console.WriteLine("-------------------------------------------------------------------------");
+            //testDeleteImage(imaggaService, testUploadImage(imaggaService));
+
+            Console.WriteLine("-------------------------------------------------------------------------");
+            testSimilarImages(imaggaService);
         }
 
+
+
+        #region test spoonacular
         private static void testGetDate(IHebcalService _hebcalService)
         {
             DateInformation d = _hebcalService.GetHebrewEvent(/*new DateTime(2015, 05 , 23), new DateTime(2015, 05, 23)*/DateTime.Now, DateTime.Now.AddDays(1)
@@ -91,7 +101,63 @@ namespace ServiceAgent
             var specificRecipe = _spoonacular.GetRecipeById(655055).GetAwaiter().GetResult();
             Console.WriteLine(specificRecipe);
         }
+        #endregion
 
-        
+
+        #region test imagga
+
+        public static string testUploadImage(IImaggaService imaggaService)
+        {
+            string UploadId = imaggaService.UploadImageToServer(@"C:\Users\Dror\source\repos\dotNet5782_7612_5986\PL\Icons\customer.png");
+            Console.WriteLine(UploadId);
+
+            return UploadId;
+        }
+
+        public static void testDeleteImage(IImaggaService imaggaService, string UploadId)
+        {
+            imaggaService.DeleteImageFromServer(UploadId);
+            Console.WriteLine("seccesfully Deleted");
+        }
+
+        private static void testSimilarImages(IImaggaService imaggaService)
+        {
+            testUploadUploadSimilarImages(imaggaService);
+
+            testUrlUploadSimilarImages(imaggaService);
+
+            testUrlUrlSimilarImages(imaggaService);
+        }
+
+        private static void testUploadUploadSimilarImages(IImaggaService imaggaService)
+        {
+            string UploadId = imaggaService.UploadImageToServer(@"C:\Users\Dror\source\repos\dotNet5782_7612_5986\PL\Icons\customer.png");
+            string UploadId1 = imaggaService.UploadImageToServer(@"C:\Users\Dror\source\repos\dotNet5782_7612_5986\PL\Images\map.png");
+
+            Console.WriteLine(imaggaService.IsSimilarImages(UploadId, UploadId1));
+
+            testDeleteImage(imaggaService, UploadId);
+            testDeleteImage(imaggaService, UploadId1);
+        }
+
+        private static void testUrlUploadSimilarImages(IImaggaService imaggaService)
+        {
+            string UploadId = imaggaService.UploadImageToServer(@"C:\Users\Dror\source\repos\dotNet5782_7612_5986\PL\Icons\customer.png");
+            string UploadId1 = "https://assets.bonappetit.com/photos/62b1f8f4ee3de8c374121bac/1:1/w_2560%2Cc_limit/20220615-0622-sandwiches-1779-final.jpg";
+
+            Console.WriteLine(imaggaService.IsSimilarImages(UploadId, UploadId1));
+
+            testDeleteImage(imaggaService, UploadId);
+        }
+
+        private static void testUrlUrlSimilarImages(IImaggaService imaggaService)
+        {
+            string UploadId = "https://www.eatingwell.com/thmb/vFO43UyAy2NBfjOG6wADLLCE-Kc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/cucumber-sandwich-eddcc95811f5426094ea5dbea6a6b026.jpg";
+            string UploadId1 = "https://assets.bonappetit.com/photos/62b1f8f4ee3de8c374121bac/1:1/w_2560%2Cc_limit/20220615-0622-sandwiches-1779-final.jpg";
+
+            Console.WriteLine(imaggaService.IsSimilarImages(UploadId, UploadId1));
+        }
+        #endregion
+
     }
 }

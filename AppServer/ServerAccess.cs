@@ -1,5 +1,6 @@
 ﻿using AppServer.Models;
 using ServiceAgent.Hebcal;
+using ServiceAgent.Imagga;
 using ServiceAgent.Spoonacular;
 using ServiceAgent.Spoonacular.REntities;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -11,14 +12,16 @@ namespace AppServer
     {
         private readonly ISpoonacularService _spoonacularService;
         private readonly IHebcalService _hebcalService;
+        private readonly IImaggaService _imaggaService;
 
         public ServerAccess()
         {
             _spoonacularService = new SpoonacularService();
             _hebcalService = new HebcalService();
+            _imaggaService = new ImaggaService();
         }
 
-
+        #region Spoonacular Service
         public FullRecipeData GetRecipeById(int ID)
         {
             FullRecipe recipe;
@@ -104,22 +107,45 @@ namespace AppServer
                         Title = r.Title
                     });
         }
+        #endregion
 
         //------------------------------------------------------------------
 
+        #region HebCal Service
         public UsedDate GetDateEvent()
         {
-            DateInformation useDate;
-
             try
             {
-                useDate = _hebcalService.GetHebrewEvent(DateTime.Now, DateTime.Now.AddDays(3))
+                DateInformation useDate = _hebcalService.GetHebrewEvent(DateTime.Now, DateTime.Now.AddDays(3))
                                            .GetAwaiter().GetResult();
 
                 return new UsedDate() { Date = useDate.Date, Description = useDate.Title /*ID*/};
             }
             catch (Exception) { throw; }
         }
-        
+        #endregion
+
+        //------------------------------------------------------------------
+
+        #region Imagga service
+        public bool DoesImageMatchRecipe(string spoonacularUrl, string newUrl)
+        {
+            bool doesNeedDelete = false;
+
+            if(!newUrl.Contains("http")) 
+            {
+                doesNeedDelete = true;
+                newUrl = _imaggaService.UploadImageToServer(newUrl);
+            }
+
+            bool canUpload = _imaggaService.IsSimilarImages(spoonacularUrl, newUrl);
+
+            if(doesNeedDelete) 
+            {
+                _imaggaService.DeleteImageFromServer(newUrl);
+            }
+            return canUpload;
+        }
+        #endregion
     }
 }

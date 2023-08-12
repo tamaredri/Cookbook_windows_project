@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.IO;
 
 namespace Presentation.ViewModels
 {
@@ -33,6 +34,8 @@ namespace Presentation.ViewModels
                 comment = value; OnPropertyChanged(nameof(Comment)); }
         }
 
+        private string? recipeImage;
+
         private ObservableCollection<string>? _images;
         public IEnumerable<string>? Images => _images;
 
@@ -51,11 +54,27 @@ namespace Presentation.ViewModels
             {
                 foreach (string filePath in openFileDialog.FileNames)
                 {
-                    _images!.Add(filePath); 
+                    if (IsValidImageFile(filePath))
+                    {
+                        _images!.Add(filePath);
+                    }
+                    else MessageBox.Show($"Invalid image file: {Path.GetFileName(filePath)}. Image does not match the recipe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
+        private bool IsValidImageFile(string filePath)
+        {
+            try
+            {
+                return _serverAccess!.DoesImageMatchRecipe(recipeImage!, filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
 
         public ICommand? AddTodayDateCommand => new CommandBase(execute => AddDate());
         private void AddDate()
@@ -80,13 +99,15 @@ namespace Presentation.ViewModels
             a = 3;
         }
 
-        public SuccessDataViewModel(IServerAccess? serverAccess, DBRecipeSuccessData successData)
+        public SuccessDataViewModel(IServerAccess? serverAccess, DBRecipeSuccessData successData, string? image)
         {
             _serverAccess = serverAccess;
             ID = successData.ID;
 
-            rating = successData.Rating;
+            Random rnd = new Random();
+            rating = rnd.NextInt64(5);//successData.Rating;
             comment = successData.Comment;
+            recipeImage = image;
 
             _images = new ObservableCollection<string>(successData.Images!);
 

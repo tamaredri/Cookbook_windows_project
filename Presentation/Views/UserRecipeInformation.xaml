@@ -158,12 +158,15 @@
                     <materialDesign:PackIcon Kind="ContentSave" />
                 </Button>
 
-                <materialDesign:RatingBar
-                    x:Name="ReadOnlyRatingBar"
-                    Value="{Binding Rating}"/>
+                <!--<materialDesign:RatingBar x:Name="RatingBar"
+                                          Value="{Binding Rating}"/>
 
+                <TextBlock Margin="10,2,0,0"
+                           VerticalAlignment="Top"
+                           Text="{Binding ElementName=RatingBar, 
+                                          Path=Value, 
+                                          StringFormat=Rating: {0}}" />-->
                 
-
             </DockPanel>
 
         </Grid>

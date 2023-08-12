@@ -27,10 +27,7 @@ namespace ServiceAgent.Spoonacular
         /// GetFullQuery Doc
         /// <returns>The complete query ready to be sent to the website
         /// </returns>
-        private string? GetFullQuery()
-        {
-            return $"{Parameters}&{key}";
-        }
+        private string? GetFullQuery() { return $"{Parameters}&{key}"; }
 
         #region interface implementation
         public async Task<IEnumerable<Recipe>> GetRecipiesByFreeSearch(string query)
