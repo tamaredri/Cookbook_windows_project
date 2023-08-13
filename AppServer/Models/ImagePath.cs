@@ -3,6 +3,6 @@
     public class ImagePath
     {
         public int ID { get; set; }
-        public string? Path { get; set; }
+        public string? Path { get; set; } 
     }
 }

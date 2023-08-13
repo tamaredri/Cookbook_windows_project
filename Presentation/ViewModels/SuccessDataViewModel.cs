@@ -99,7 +99,7 @@ namespace Presentation.ViewModels
             a = 3;
         }
 
-        public SuccessDataViewModel(IServerAccess? serverAccess, DBRecipeSuccessData successData, string? image)
+        public SuccessDataViewModel(IServerAccess? serverAccess, RecipeDB successData, string? image)
         {
             _serverAccess = serverAccess;
             ID = successData.ID;
@@ -109,10 +109,11 @@ namespace Presentation.ViewModels
             comment = successData.Comment;
             recipeImage = image;
 
-            _images = new ObservableCollection<string>(successData.Images!);
+            _images = new ObservableCollection<string>((from r_image in successData.RecipeImages! 
+                                                        select r_image.Path).ToList());
 
             _usedDates = new ObservableCollection<UsedDatesViewModel>(
-                            (from d in successData.UsedDates
+                            (from d in successData.RecipeDates
                              select new UsedDatesViewModel(d)).ToList());
         }
 

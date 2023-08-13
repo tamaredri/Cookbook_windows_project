@@ -86,7 +86,7 @@ namespace Presentation.ViewModels
                  select new RecipeStepViewModel(i)).ToList());
 
             _successData = new SuccessDataViewModel(_serverAccess, /*fullRecipe.SuccessData!*/
-                new DBRecipeSuccessData(), fullRecipe.Image);
+                new RecipeDB(), fullRecipe.Image);
         }
     }
 }

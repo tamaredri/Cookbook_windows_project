@@ -22,7 +22,7 @@ namespace AppServer.Controllers
         {
             if (_dbContext.Recipes == null) { return NotFound(); }
 
-            return await _dbContext.Recipes.ToListAsync();
+            return await _dbContext.Recipes.Include(r => r.RecipeDates).Include(r => r.RecipeImages).ToListAsync();
         }
 
         // GET: api/Rcepies/5

@@ -41,5 +41,6 @@ namespace AppServer
         #region Imagga
         public bool DoesImageMatchRecipe(string spoonacularUrl, string newUrl);
         #endregion
+
     }
 }

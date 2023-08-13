@@ -20,6 +20,6 @@
 
         public IEnumerable<RecipeStepData>? Steps { get; set; }
 
-        public DBRecipeSuccessData? SuccessData { get; set; } = new DBRecipeSuccessData();
+        public RecipeDB? SuccessData { get; set; } = new RecipeDB();
     }
 }

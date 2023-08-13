@@ -7,8 +7,8 @@
         public int RecipeRating { get; set; }
         public string? Comment { get; set; }
 
-        public IEnumerable<UsedDate>? RecipeDates { get; set; }
+        public IEnumerable<UsedDate>? RecipeDates { get; set; } = new List<UsedDate>();
 
-        public IEnumerable<ImagePath>? RecipeImages { get; set; }
+        public IEnumerable<ImagePath>? RecipeImages { get; set; } = new List<ImagePath>();
     }
 }
