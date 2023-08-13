@@ -44,7 +44,7 @@ namespace AppServer.Controllers
             await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetRecipe),
-                                   new { Id = recipe.Id, RecipeRating = recipe.RecipeRating },
+                                   new { Id = recipe.Id },
                                    recipe);
         }
 

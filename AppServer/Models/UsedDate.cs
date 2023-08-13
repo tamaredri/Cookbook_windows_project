@@ -2,7 +2,7 @@
 {
     public class UsedDate
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public DateTime Date { get; set; }
 
