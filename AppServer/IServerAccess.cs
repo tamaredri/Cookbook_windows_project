@@ -19,6 +19,7 @@ namespace AppServer
         /// <returns></returns>
         IEnumerable<BasicRecipeData> GetRecipiesByIngredients(IEnumerable<string?> ingredients);
 
+
         /// <summary>
         /// Get a singke recipe - full representation
         /// </summary>
@@ -40,6 +41,16 @@ namespace AppServer
 
         #region Imagga
         public bool DoesImageMatchRecipe(string spoonacularUrl, string newUrl);
+        #endregion
+
+        #region RecipeDB
+        public void SaveOrUpdateRacipeToDB(RecipeDB recipeDB);
+
+        /// <summary>
+        /// Get all recipes the user used and saved
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<BasicRecipeData> GetRecipiesFromDB();
         #endregion
 
     }

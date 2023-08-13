@@ -14,7 +14,7 @@ namespace Presentation.ViewModels
 
         public UsedDatesViewModel(UsedDate usedDate)
         {
-            Date = $"{usedDate!.Date.Day}/{usedDate!.Date.Month}/{usedDate!.Date.Year}";
+            Date = $"{usedDate!.Date.Day.ToString("00")}/{usedDate!.Date.Month.ToString("00")}/{usedDate!.Date.Year.ToString("0000")}";
             Description = usedDate!.Description; 
         }
     }

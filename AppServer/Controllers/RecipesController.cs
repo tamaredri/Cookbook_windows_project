@@ -16,7 +16,7 @@ namespace AppServer.Controllers
             _dbContext = dbContext;
         }
 
-        // GET: api/Rcepies/Get
+        // GET: api/Rcepies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecipeDB>>> GetRecipes()
         {
@@ -27,7 +27,7 @@ namespace AppServer.Controllers
                                            .ToListAsync();
         }
 
-        // GET: api/Rcepie/Get/5
+        // GET: api/Rcepies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RecipeDB>> GetRecipe(int id)
         {
@@ -40,7 +40,7 @@ namespace AppServer.Controllers
             return recipe;
         }
 
-        // POST: api/Rcepie/Add
+        // POST: api/Rcepies
         [HttpPost]
         public async Task<ActionResult<RecipeDB>> PostRecipe(RecipeDB recipe)
         {
@@ -52,7 +52,7 @@ namespace AppServer.Controllers
                                    recipe);
         }
 
-        // PUT: api/Rcepie/Update/5
+        // PUT: api/Rcepies/5
         [HttpPut("{id}")]
         public async Task<ActionResult<RecipeDB>> PutRecipe(int id, RecipeDB recipe)
         {
@@ -76,7 +76,7 @@ namespace AppServer.Controllers
         private bool RecipeExists(int id) =>
             (_dbContext.Recipes?.Any(e => e.ID == id)).GetValueOrDefault();
 
-        // DELETE: api/Rcepies/Delete/5
+        // DELETE: api/Rcepies/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<RecipeDB>> DeleteRecipe(int id)
         {

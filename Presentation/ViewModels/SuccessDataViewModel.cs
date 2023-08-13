@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.IO;
+using System.Globalization;
 
 namespace Presentation.ViewModels
 {
@@ -21,8 +22,8 @@ namespace Presentation.ViewModels
         
         private int ID { get; }
 
-        private double rating;
-        public double Rating { 
+        private int rating;
+        public int Rating { 
             get { return rating; }
             set { rating = value; OnPropertyChanged(nameof(Rating)); }
         }
@@ -92,20 +93,34 @@ namespace Presentation.ViewModels
         public ICommand? SaveChangesCommand => new CommandBase(execute => SaveComments());
         private void SaveComments()
         {
-            //save comments in db
-            //save rating in db
-            double a = rating;
-            var t = Images;
-            a = 3;
+            RecipeDB recipeDB = new RecipeDB()
+            {
+                ID = ID,
+                Comment = Comment,
+                RecipeRating = Rating,
+                RecipeDates = (from d in UsedDates 
+                               select new UsedDate() { Date = DateTime.ParseExact(d.Date!, "dd/mm/yyyy", CultureInfo.InvariantCulture), 
+                                                       Description = d.Description }).ToList(),
+                RecipeImages = (from i in Images select new ImagePath() { Path = i}).ToList()
+            };
+            try
+            {
+                _serverAccess!.SaveOrUpdateRacipeToDB(recipeDB);
+                MessageBox.Show("saved successfuly", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        public SuccessDataViewModel(IServerAccess? serverAccess, RecipeDB successData, string? image)
+        public SuccessDataViewModel(IServerAccess? serverAccess, RecipeDB successData, string? image, int id)
         {
             _serverAccess = serverAccess;
-            ID = successData.ID;
+            ID = id;
 
             Random rnd = new Random();
-            rating = rnd.NextInt64(5);//successData.Rating;
+            rating = rnd.Next(0,6);//successData.Rating;
             comment = successData.Comment;
             recipeImage = image;
 
@@ -116,7 +131,5 @@ namespace Presentation.ViewModels
                             (from d in successData.RecipeDates
                              select new UsedDatesViewModel(d)).ToList());
         }
-
-       
     }
 }

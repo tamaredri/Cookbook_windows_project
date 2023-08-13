@@ -9,6 +9,7 @@ using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net;
+using System.Text;
 
 namespace AppServer
 {
@@ -25,6 +26,8 @@ namespace AppServer
             _imaggaService = new ImaggaService();
         }
 
+
+        #region DBRecipe
         private async Task<RecipeDB> GetRecipeDBById(int ID)
         {
             HttpClient client = new();
@@ -34,10 +37,12 @@ namespace AppServer
             string Parameters = $"/api/Recipes/{ID}";
 
             HttpResponseMessage response = await client.GetAsync(Parameters).ConfigureAwait(false);
+            
+            // the recipe does not exist in the data base
             if (response.StatusCode == HttpStatusCode.NotFound)
-            {
                 return new RecipeDB();
-            }
+
+
             if (!response.IsSuccessStatusCode)
                 throw new Exception("response StatusCode is error");
 
@@ -45,44 +50,66 @@ namespace AppServer
             var recipeResponse = JsonConvert.DeserializeObject<RecipeDB>(jsonString);
 
             return recipeResponse!;
-
         }
 
-        private async Task<RecipeDB> SaveRecipeDBById(int ID)
+        public async Task<IEnumerable<RecipeDB>> GetAllSavedRecipesFromDB()
         {
             HttpClient client = new();
             string url = $"https://localhost:7089";
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.BaseAddress = new Uri(url);
-            string Parameters = $"/api/Recipes/{ID}";
-
-            
-            // IF THE RECIPE DOES NOT EXIST IN THE DATABASE - SAVE ALL HIS DATA IN THE DB
-
-            // IF THE RECIPE EXIST IN THE DATABASE - UPDATE THE DATA
+            string Parameters = $"/api/Recipes";
 
             HttpResponseMessage response = await client.GetAsync(Parameters).ConfigureAwait(false);
-            if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                // post
-            }
-            else // put
-            
+
             if (!response.IsSuccessStatusCode)
                 throw new Exception("response StatusCode is error");
 
             var jsonString = await response.Content.ReadAsStringAsync();
-            var recipeResponse = JsonConvert.DeserializeObject<RecipeDB>(jsonString);
+            var recipeResponse = JsonConvert.DeserializeObject<IEnumerable<RecipeDB>>(jsonString);
 
             return recipeResponse!;
-
         }
+
+        private async Task SaveRecipeDById(RecipeDB recipeDB)
+        {
+            HttpClient client = new();
+            string url = $"https://localhost:7089";
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.BaseAddress = new Uri(url);
+            string Parameters = $"/api/Recipes";
+
+            string? jsonContent = JsonConvert.SerializeObject(recipeDB);
+            HttpContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync(Parameters + $"/{recipeDB.ID}", content).ConfigureAwait(false);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                response = await client.PostAsync(Parameters, content).ConfigureAwait(false);
+            }
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(response.Content.ToString());
+        }
+
+        public void SaveOrUpdateRacipeToDB(RecipeDB recipeDB)
+        {
+            try
+            {
+                SaveRecipeDById(recipeDB).GetAwaiter().GetResult();
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
+
+        // get the full list of recipes inthe db. MARK - teh return type must be 
+        #endregion
 
         //--------------------------------------------------------------------
 
         #region Spoonacular Service
-
-
         public FullRecipeData GetRecipeById(int ID)
         {
             FullRecipe recipe;
@@ -122,7 +149,6 @@ namespace AppServer
             catch (Exception) { throw; }
         }
 
-
         public IEnumerable<BasicRecipeData> GetRecipiesByFreeSearch(string query)
         {
             IEnumerable<Recipe> recipes;
@@ -153,6 +179,20 @@ namespace AppServer
                         ID = r.ID,
                         Image = r.Image,
                         Title = r.Title
+                    });
+        }
+
+        public IEnumerable<BasicRecipeData> GetRecipiesFromDB()
+        {
+            IEnumerable<RecipeDB> recipesDB = GetAllSavedRecipesFromDB().GetAwaiter().GetResult();
+
+            return (from r in recipesDB
+                    let sr = GetRecipeById(r.ID)
+                    select new BasicRecipeData()
+                    {
+                        ID = sr.ID,
+                        Image = sr.Image,
+                        Title = sr.Title
                     });
         }
 
