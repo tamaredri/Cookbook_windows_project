@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Net.Mime.MediaTypeNames;
+using System.Net;
 
 namespace AppServer
 {
@@ -24,33 +25,63 @@ namespace AppServer
             _imaggaService = new ImaggaService();
         }
 
-        #region Spoonacular Service
-
         private async Task<RecipeDB> GetRecipeDBById(int ID)
         {
             HttpClient client = new();
-            string url = $"https://localhost:7089/api/Recipes";
+            string url = $"https://localhost:7089";
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.BaseAddress = new Uri(url);
-            string Parameters = $"/{ID}";
+            string Parameters = $"/api/Recipes/{ID}";
 
-            HttpResponseMessage response = await client.GetAsync(Parameters).ConfigureAwait(true);
+            HttpResponseMessage response = await client.GetAsync(Parameters).ConfigureAwait(false);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return new RecipeDB();
+            }
             if (!response.IsSuccessStatusCode)
                 throw new Exception("response StatusCode is error");
 
             var jsonString = await response.Content.ReadAsStringAsync();
             var recipeResponse = JsonConvert.DeserializeObject<RecipeDB>(jsonString);
 
-            //extract the steps from the json object
-            //var dynamicRecipeResponse = JsonConvert.DeserializeObject<dynamic>(jsonString)!;
-            //var analyzedInstructionsProperty = dynamicRecipeResponse[0]!.analyzedInstructions;
-            //if (analyzedInstructionsProperty.HasValues)
-            //    recipeResponse.Steps = analyzedInstructionsProperty[0].steps.ToObject<IEnumerable<RecipeStep>>();
-            //else recipeResponse.Steps = new List<RecipeStep>();
-
-            return recipeResponse;
+            return recipeResponse!;
 
         }
+
+        private async Task<RecipeDB> SaveRecipeDBById(int ID)
+        {
+            HttpClient client = new();
+            string url = $"https://localhost:7089";
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.BaseAddress = new Uri(url);
+            string Parameters = $"/api/Recipes/{ID}";
+
+            
+            // IF THE RECIPE DOES NOT EXIST IN THE DATABASE - SAVE ALL HIS DATA IN THE DB
+
+            // IF THE RECIPE EXIST IN THE DATABASE - UPDATE THE DATA
+
+            HttpResponseMessage response = await client.GetAsync(Parameters).ConfigureAwait(false);
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                // post
+            }
+            else // put
+            
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("response StatusCode is error");
+
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var recipeResponse = JsonConvert.DeserializeObject<RecipeDB>(jsonString);
+
+            return recipeResponse!;
+
+        }
+
+        //--------------------------------------------------------------------
+
+        #region Spoonacular Service
+
 
         public FullRecipeData GetRecipeById(int ID)
         {
@@ -82,7 +113,8 @@ namespace AppServer
                                                      {
                                                          Number = r.Number,
                                                          Step = r.Step
-                                                     })
+                                                     }),
+                                            SuccessData = r_Db
 
                 };
 
@@ -90,7 +122,6 @@ namespace AppServer
             catch (Exception) { throw; }
         }
 
-        
 
         public IEnumerable<BasicRecipeData> GetRecipiesByFreeSearch(string query)
         {
