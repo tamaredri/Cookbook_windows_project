@@ -68,7 +68,7 @@ namespace Presentation.ViewModels
         {
             try
             {
-                return _serverAccess!.DoesImageMatchRecipe(recipeImage!, filePath);
+                return _serverAccess!.DoesImageMatchRecipe(recipeImage!, filePath) && !Images!.Contains(filePath);
             }
             catch (Exception ex)
             {
@@ -120,7 +120,7 @@ namespace Presentation.ViewModels
             ID = id;
 
             Random rnd = new Random();
-            rating = rnd.Next(0,6);//successData.Rating;
+            rating = rnd.Next(1,6);//successData.Rating;
             comment = successData.Comment;
             recipeImage = image;
 

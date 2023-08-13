@@ -22,7 +22,7 @@ namespace AppServer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recipes", x => x.ID);
-                    table.CheckConstraint("RatingCheck", "RecipeRating >= 0 AND RecipeRating < 6");
+                    table.CheckConstraint("RatingCheck", "RecipeRating > 0 AND RecipeRating < 6");
                 });
 
             migrationBuilder.CreateTable(
