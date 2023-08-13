@@ -11,7 +11,7 @@ namespace ServiceAgent.Spoonacular
 
         readonly string url = $"https://api.spoonacular.com/";
 
-        public const string SPOONACULAR_API_KEY = "eccecffd02a843c18dd94bd0e3497f09";
+        public const string SPOONACULAR_API_KEY = "95a76740ceaa42c4ab0451115aa2a962";
         
         string? Parameters { get; set; }
 
