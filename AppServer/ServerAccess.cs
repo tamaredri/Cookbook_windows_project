@@ -103,8 +103,6 @@ namespace AppServer
                 throw;
             }
         }
-
-        // get the full list of recipes inthe db. MARK - teh return type must be 
         #endregion
 
         //--------------------------------------------------------------------

@@ -68,7 +68,7 @@ namespace ServiceAgent.Spoonacular
 
             HttpResponseMessage response = await client.GetAsync(GetFullQuery()).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
-                throw new Exception("response StatusCode is error");
+                throw new Exception(response.StatusCode.ToString());
 
             var jsonString = await response.Content.ReadAsStringAsync();
             var recipeResponse = JsonConvert.DeserializeObject<IEnumerable<FullRecipe>>(jsonString)!.FirstOrDefault()!;
