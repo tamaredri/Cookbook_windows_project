@@ -119,8 +119,7 @@ namespace Presentation.ViewModels
             _serverAccess = serverAccess;
             ID = id;
 
-            Random rnd = new Random();
-            rating = rnd.Next(1,6);//successData.Rating;
+            rating = successData.RecipeRating;
             comment = successData.Comment;
             recipeImage = image;
 

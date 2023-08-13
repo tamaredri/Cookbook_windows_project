@@ -44,7 +44,7 @@ namespace AppServer
 
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception("response StatusCode is error");
+                throw new Exception(response.StatusCode.ToString());
 
             var jsonString = await response.Content.ReadAsStringAsync();
             var recipeResponse = JsonConvert.DeserializeObject<RecipeDB>(jsonString);
@@ -98,7 +98,7 @@ namespace AppServer
             {
                 SaveRecipeDById(recipeDB).GetAwaiter().GetResult();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw;
             }
@@ -191,7 +191,7 @@ namespace AppServer
                         ID = sr.ID,
                         Image = sr.Image,
                         Title = sr.Title
-                    });
+                    }).ToList();
         }
 
         public IEnumerable<BasicRecipeData> GetSimilarRecipes(int ID)
@@ -210,7 +210,7 @@ namespace AppServer
                         ID = r.ID,
                         Image = r.Image,
                         Title = r.Title
-                    });
+                    }).ToList();
         }
         #endregion
 
