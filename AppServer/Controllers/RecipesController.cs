@@ -44,7 +44,7 @@ namespace AppServer.Controllers
             await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetRecipe),
-                                   new { Id = recipe.Id },
+                                   new { Id = recipe.ID },
                                    recipe);
         }
 
@@ -52,7 +52,7 @@ namespace AppServer.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<RecipeDB>> PutRecipe(int id, RecipeDB recipe)
         {
-            if(id != recipe.Id) { return BadRequest(); }
+            if(id != recipe.ID) { return BadRequest(); }
 
             _dbContext.Entry(recipe).State = EntityState.Modified;
 
@@ -70,7 +70,7 @@ namespace AppServer.Controllers
         }
 
         private bool RecipeExists(int id) =>
-            (_dbContext.Recipes?.Any(e => e.Id == id)).GetValueOrDefault();
+            (_dbContext.Recipes?.Any(e => e.ID == id)).GetValueOrDefault();
 
         // DELETE: api/Rcepies/5
         [HttpDelete("{id}")]
