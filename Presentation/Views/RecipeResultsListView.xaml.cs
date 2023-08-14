@@ -1,5 +1,4 @@
-﻿using Presentation.Models;
-using Presentation.ViewModels;
+﻿using Presentation.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

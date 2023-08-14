@@ -31,7 +31,7 @@ namespace Presentation.ViewModels
 
         private ObservableCollection<RecipeForListViewModel>? _Recipes;
         public IEnumerable<RecipeForListViewModel>? Recipes => _Recipes;
-
+        
         private RecipeForListViewModel? _selectedItem;
         public RecipeForListViewModel? SelectedItem
         {
@@ -55,9 +55,11 @@ namespace Presentation.ViewModels
                 _navigationStore.CurrentViewModel = new FullRecipeViewModel(_serverAccess,
                                                                            _navigationStore,
                                                                             selectedRecipe);
+
             }
             catch (Exception e)
             {
+                _isprogressBarIndeterminate = false;
                 MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             

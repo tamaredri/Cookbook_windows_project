@@ -1,5 +1,4 @@
-﻿using Presentation.Models;
-using Presentation.Stores;
+﻿using Presentation.Stores;
 using Presentation.ViewModels;
 using Presentation.Views;
 using System;

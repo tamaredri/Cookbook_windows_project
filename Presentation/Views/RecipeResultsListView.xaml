@@ -15,7 +15,6 @@
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
 
-
         <Button VerticalAlignment="Top"
                 Margin="0,15,10,0"
                 Background="Transparent" 
