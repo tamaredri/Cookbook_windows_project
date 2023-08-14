@@ -99,7 +99,7 @@ namespace Presentation.ViewModels
                 Comment = Comment,
                 RecipeRating = Rating,
                 RecipeDates = (from d in UsedDates 
-                               select new UsedDate() { Date = DateTime.ParseExact(d.Date!, "dd/mm/yyyy", CultureInfo.InvariantCulture), 
+                               select new UsedDate() { Date = DateTime.ParseExact(d.Date!, "dd/MM/yyyy", CultureInfo.InvariantCulture), 
                                                        Description = d.Description }).ToList(),
                 RecipeImages = (from i in Images select new ImagePath() { Path = i}).ToList()
             };

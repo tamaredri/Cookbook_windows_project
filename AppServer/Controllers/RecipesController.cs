@@ -54,11 +54,55 @@ namespace AppServer.Controllers
 
         // PUT: api/Rcepies/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<RecipeDB>> PutRecipe(int id, RecipeDB recipe)
+        public async Task<ActionResult<RecipeDB>> PutRecipe(int id, RecipeDB updatedRecipe)
         {
-            if(id != recipe.ID) { return BadRequest(); }
+            if (id != updatedRecipe.ID)
+            {
+                return BadRequest();
+            }
 
-            _dbContext.Entry(recipe).State = EntityState.Modified;
+            var existingRecipe = await _dbContext.Recipes.Include(r => r.RecipeDates)
+                                                      .Include(r => r.RecipeImages)
+                                                      .FirstOrDefaultAsync(r => r.ID == id);
+
+            if (existingRecipe == null)
+            {
+                return NotFound();
+            }
+
+            // Update properties of the main entity
+            existingRecipe.RecipeRating = updatedRecipe.RecipeRating;
+            existingRecipe.Comment = updatedRecipe.Comment;
+
+            // Update or add RecipeDates
+            foreach (var updatedDate in updatedRecipe.RecipeDates!)
+            {
+                var existingDate = existingRecipe.RecipeDates!.FirstOrDefault(d => d.ID == updatedDate.ID);
+
+                if (existingDate != null)
+                {
+                    _dbContext.Entry(existingDate).CurrentValues.SetValues(updatedDate);
+                }
+                else
+                {
+                    existingRecipe.RecipeDates.Add(updatedDate);
+                }
+            }
+
+            // Update or add RecipeImages
+            foreach (var updatedImage in updatedRecipe.RecipeImages!)
+            {
+                var existingImage = existingRecipe.RecipeImages?.FirstOrDefault(i => i.ID == updatedImage.ID);
+
+                if (existingImage != null)
+                {
+                    _dbContext.Entry(existingImage).CurrentValues.SetValues(updatedImage);
+                }
+                else
+                {
+                    existingRecipe.RecipeImages.Add(updatedImage);
+                }
+            }
 
             try
             {
@@ -66,12 +110,19 @@ namespace AppServer.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecipeExists(id)) { return NotFound(); }
-                else { throw; }
+                if (!RecipeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
             return NoContent();
         }
+
 
         private bool RecipeExists(int id) =>
             (_dbContext.Recipes?.Any(e => e.ID == id)).GetValueOrDefault();

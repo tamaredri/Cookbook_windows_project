@@ -45,7 +45,7 @@ namespace ServiceAgent.Imagga
 
             if (jsonObject!.status.type != "success")
                 throw new Exception(jsonObject!.status.text);
-            return jsonObject!.result.distance < 1.3;
+            return jsonObject!.result.distance < 1.1;
         }
 
         public string UploadImageToServer(string ImageUrl)

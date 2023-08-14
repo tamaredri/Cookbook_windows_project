@@ -14,9 +14,9 @@ namespace AppServer.Models
         public string? Comment { get; set; } = "";
 
         [JsonProperty("recipeDates")]
-        public IEnumerable<UsedDate>? RecipeDates { get; set; } = new List<UsedDate>();
+        public List<UsedDate>? RecipeDates { get; set; } = new List<UsedDate>();
 
         [JsonProperty("recipeImages")]
-        public IEnumerable<ImagePath>? RecipeImages { get; set; } = new List<ImagePath>();
+        public List<ImagePath>? RecipeImages { get; set; } = new List<ImagePath>();
     }
 }
