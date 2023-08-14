@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:Presentation.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-             >
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -158,15 +157,29 @@
                     <materialDesign:PackIcon Kind="ContentSave" />
                 </Button>
 
-                <materialDesign:RatingBar x:Name="RatingBar"
-                                          Value="{Binding Rating}"/>
+                <StackPanel Margin="10">
+                    <materialDesign:RatingBar x:Name="c"
+                                          Value="{Binding Rating, Mode=TwoWay}"/>
+                    
+                    <!--<Slider Name="Slider" Value="{Binding Rating}"
+                            Minimum="1"
+                            Maximum="5"
+                            Style="{StaticResource MaterialDesignDiscreteSlider}"
+                            TickFrequency="1"
+                            TickPlacement="BottomRight"
+                            Width="0" Height="0"
+                            IsEnabled="False"
+                            Visibility="Hidden"/>-->
 
-                <TextBlock Margin="10,2,0,0"
+
+                    <!--<TextBlock Margin="10,2,0,0"
                            VerticalAlignment="Top"
-                           Text="{Binding ElementName=RatingBar, 
+                           Text="{Binding ElementName=Rating, 
                                           Path=Value, 
-                                          StringFormat=Rating: {0}}" />
+                                          StringFormat=Your Rating: {0}}" />-->
+                </StackPanel>
                 
+
             </DockPanel>
 
         </Grid>

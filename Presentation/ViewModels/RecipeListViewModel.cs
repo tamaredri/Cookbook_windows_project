@@ -59,7 +59,6 @@ namespace Presentation.ViewModels
             }
             catch (Exception e)
             {
-                _isprogressBarIndeterminate = false;
                 MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
