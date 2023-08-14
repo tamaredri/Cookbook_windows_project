@@ -159,18 +159,13 @@
                 </Button>
 
                 <materialDesign:RatingBar x:Name="RatingBar"
-                                          />
+                                          Value="{Binding Rating}"/>
 
                 <TextBlock Margin="10,2,0,0"
                            VerticalAlignment="Top"
-                           >
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="Rating: {0}">
-                            <Binding ElementName="RatingBar" Path="Value" />
-                            <Binding Path="Rating" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                           Text="{Binding ElementName=RatingBar, 
+                                          Path=Value, 
+                                          StringFormat=Rating: {0}}" />
                 
                 
             </DockPanel>
