@@ -11,7 +11,7 @@ namespace AppServer.Models
         public int RecipeRating { get; set; }
 
         [JsonProperty("comment")]
-        public string? Comment { get; set; }
+        public string? Comment { get; set; } = "";
 
         [JsonProperty("recipeDates")]
         public IEnumerable<UsedDate>? RecipeDates { get; set; } = new List<UsedDate>();
